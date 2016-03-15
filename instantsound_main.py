@@ -44,7 +44,7 @@ def on_inline_query(msg):
 
     # Compose your own answers
     articles = [{'type': 'article',
-                    'id': 'abc', 'title': 'ABC', 'message_text': 'Good morning'}]
+                    'id': 'abc', 'title': 'HOII UEELI', 'message_text': 'Good morning'}]
 
     bot.answerInlineQuery(query_id, articles)
 
