@@ -26,7 +26,7 @@ app = Flask(__name__)
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
     print 'Chat Message:', content_type, chat_type, chat_id
-    
+
      #builds path to file
     script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
     rel_path = "sounds/badumtss.mp4"
@@ -65,11 +65,8 @@ update_queue = Queue()  # channel between `app` and `bot`
 bot.notifyOnMessage({'normal': on_chat_message,
                      'inline_query': on_inline_query,
                      'chosen_inline_result': on_chosen_inline_result}, source=update_queue) # take updates from queue
-print 'Listening ...'
 
-# Keep the program running.
-while 1:
-    time.sleep(10)
+
 
 @app.route('/'+TOKEN, methods=['GET', 'POST'])
 def pass_update():
