@@ -11,7 +11,7 @@ def handle(msg):
 
     #builds path to file
     script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
-    rel_path = "sounds/badumtss.ogg"
+    rel_path = "sounds/badumtss.mp4"
     abs_file_path = os.path.join(script_dir, rel_path)
 
     #opens file
