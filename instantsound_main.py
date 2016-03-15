@@ -39,7 +39,7 @@ def on_chat_message(msg):
     bot.sendVoice(chat_id, music_file)
 
 def on_inline_query(msg):
-    query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
+    query_id, from_id, query_string, chat_id= telepot.glance(msg, flavor='inline_query')
     print 'Inline Query:', query_id, from_id, query_string
 
     # Compose your own answers
@@ -47,6 +47,16 @@ def on_inline_query(msg):
                     'id': 'abc', 'title': 'HOII UEELI', 'message_text': 'Good morning'}]
 
     bot.answerInlineQuery(query_id, articles)
+         #builds path to file
+    script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+    rel_path = "sounds/badumtss.mp4"
+    abs_file_path = os.path.join(script_dir, rel_path)
+
+    #opens file
+    music_file = open(abs_file_path, 'rb')
+
+    #sends it as voice message
+    bot.sendVoice(chat_id, music_file)
 
 def on_chosen_inline_result(msg):
     result_id, from_id, query_string = telepot.glance(msg, flavor='chosen_inline_result')
