@@ -1,11 +1,24 @@
 from flask import Flask, request
 import telepot
 import base64
+import os
 from Queue import Queue
 app = Flask(__name__)
 
 def handle(msg):
     print msg
+    content_type, chat_type, chat_id = telepot.glance(msg)
+
+    #builds path to file
+    script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+    rel_path = "sounds/badumtss.ogg"
+    abs_file_path = os.path.join(script_dir, rel_path)
+
+    #opens file
+    music_file = open(abs_file_path, 'rb')
+
+    #sends it as voice message
+    bot.sendVoice(chat_id, music_file)
 
 
 
