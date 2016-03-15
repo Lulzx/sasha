@@ -40,7 +40,7 @@ def on_chat_message(msg):
 
 def on_inline_query(msg):
     query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
-    print 'Inline Query:', query_id, from_id, query_string
+    print 'Inline Query:', msg
 
     #builds path to file
     script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
