@@ -25,7 +25,7 @@ app = Flask(__name__)
 
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
-    print 'Chat Message:', content_type, chat_type, chat_id
+    print 'Chat Message:', msg
 
      #builds path to file
     script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
