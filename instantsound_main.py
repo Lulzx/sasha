@@ -42,12 +42,28 @@ def on_inline_query(msg):
     query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
     print 'Inline Query:', query_id, from_id, query_string
 
+    #builds path to file
+    script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+    rel_path = "sounds/badumtss.mp4"
+    abs_file_path = os.path.join(script_dir, rel_path)
+
+    #opens file
+    music_file = open(abs_file_path, 'rb')
+
+
     # Compose your own answers
-    articles = [{'type': 'article',
-                    'id': 'abc', 'title': 'HOII UEELI', 'message_text': 'Good morning'}]
+    articles = [{'type': 'video',
+                    'id': '1', 'video_url': music_file, 'mime_type': '“video/mp4”', 'message_text': 'Badumtss'}]
 
     bot.answerInlineQuery(query_id, articles)
-         #builds path to file
+
+
+
+def on_chosen_inline_result(msg):
+    result_id, from_id, query_string = telepot.glance(msg, flavor='chosen_inline_result')
+    print 'Chosen Inline Result:', result_id, from_id, query_string
+
+    #builds path to file
     script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
     rel_path = "sounds/badumtss.mp4"
     abs_file_path = os.path.join(script_dir, rel_path)
@@ -57,10 +73,6 @@ def on_inline_query(msg):
 
     #sends it as voice message
     bot.sendVoice(from_id, music_file)
-
-def on_chosen_inline_result(msg):
-    result_id, from_id, query_string = telepot.glance(msg, flavor='chosen_inline_result')
-    print 'Chosen Inline Result:', result_id, from_id, query_string
 
 
 
