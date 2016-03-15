@@ -53,7 +53,7 @@ def on_inline_query(msg):
 
     # Compose your own answers
     articles = [{'type': 'video',
-                    'id': '1', 'video_url': music_file, 'mime_type': '“video/mp4”', 'message_text': 'Badumtss'}]
+                    'id': '1', 'video_url': music_file, 'mime_type': 'video/mp4', 'message_text': 'Badumtss'}]
 
     bot.answerInlineQuery(query_id, articles)
 
