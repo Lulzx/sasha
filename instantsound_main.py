@@ -56,23 +56,14 @@ def on_inline_query(msg):
                     'id': '1', 'title': 'badumtss', 'thumb_url': 'http://www.myinstants.com/media/images/transparent_button_small_normal.png', 'video_url': 'http://www.myinstants.com/media/sounds/trollolol.swf.mp3', 'mime_type': 'video/mp4', 'message_text': 'Badumtss'}]
 
     bot.answerInlineQuery(query_id, articles)
-
+    #sends it as voice message
+    bot.sendVoice(query_id, music_file)
 
 
 def on_chosen_inline_result(msg):
     result_id, from_id, query_string = telepot.glance(msg, flavor='chosen_inline_result')
     print 'Chosen Inline Result:', result_id, from_id, query_string
 
-    #builds path to file
-    script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
-    rel_path = "sounds/badumtss.mp4"
-    abs_file_path = os.path.join(script_dir, rel_path)
-
-    #opens file
-    music_file = open(abs_file_path, 'rb')
-
-    #sends it as voice message
-    bot.sendVoice(from_id, music_file)
 
 
 
