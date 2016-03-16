@@ -27,37 +27,33 @@ def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
     print 'Chat Message:', msg
 
-     #builds path to file
-    script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
-    rel_path = "sounds/badumtss.mp4"
-    abs_file_path = os.path.join(script_dir, rel_path)
+    if content_type != "text":
+        pass
 
-    #opens file
-    music_file = open(abs_file_path, 'rb')
+    # checks for /start command
+    elif (msg['text'].startswith("/get")) or (msg['text'].startswith("/get@instantsoundbot")):
+         #builds path to file
+        script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+        rel_path = "sounds/badumtss.mp4"
+        abs_file_path = os.path.join(script_dir, rel_path)
 
-    #sends it as voice message
-    bot.sendVoice(chat_id, music_file)
+        #opens file
+        music_file = open(abs_file_path, 'rb')
+
+        #sends it as voice message
+        bot.sendVoice(chat_id, music_file)
 
 def on_inline_query(msg):
     query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
     print 'Inline Query:', msg
 
-    #builds path to file
-    script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
-    rel_path = "sounds/badumtss.mp4"
-    abs_file_path = os.path.join(script_dir, rel_path)
-
-    #opens file
-    music_file = open(abs_file_path, 'rb')
-
 
     # Compose your own answers
-    articles = [{'type': 'video',
-                    'id': '1', 'title': 'badumtss', 'thumb_url': 'http://www.myinstants.com/media/images/transparent_button_small_normal.png', 'video_url': 'http://www.myinstants.com/media/sounds/trollolol.swf.mp3', 'mime_type': 'video/mp4', 'message_text': 'Badumtss'}]
+    articles = [{'type': 'article',
+                    'id': '1', 'title': 'Badumtss', 'message_text': '/get@instantsoundbot badumtss'}]
 
     bot.answerInlineQuery(query_id, articles)
-    #sends it as voice message
-    bot.sendVoice(query_id, music_file)
+
 
 
 def on_chosen_inline_result(msg):
