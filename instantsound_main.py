@@ -42,6 +42,7 @@ def on_chat_message(msg):
 
         #sends it as voice message
         bot.sendVoice(chat_id, music_file)
+        bot.sendAudio(chat_id, music_file, title='badumtss')
 
 def on_inline_query(msg):
     query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
