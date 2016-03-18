@@ -1,7 +1,7 @@
 from flask import Flask, request
 import telepot
 import base64
-import os
+from os import listdir, path
 import time
 from Queue import Queue
 app = Flask(__name__)
@@ -34,9 +34,9 @@ def on_chat_message(msg):
     # checks for /start command
     elif (msg_text.startswith("/get")) or (msg_text.startswith("/get@instantsoundbot")):
          #builds path to file
-        script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+        script_dir = path.dirname(__file__) #<-- absolute dir the script is in
         rel_path = "sounds/badumtss.mp4"
-        abs_file_path = os.path.join(script_dir, rel_path)
+        abs_file_path = path.join(script_dir, rel_path)
 
         #opens file
         music_file = open(abs_file_path, 'rb')
