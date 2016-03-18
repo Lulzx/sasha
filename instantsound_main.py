@@ -52,10 +52,10 @@ def on_chat_message(msg):
 
         #gets random number out length from file_list
         rnd_num_filelist = random.randrange(0,len(file_list))
+        rnd_file= file_list[rnd_num_filelist]
 
         #builds path to file
-        abs_file_path = path.join(script_dir, "sounds/"+file_list[rnd_num_filelist])
-
+        abs_file_path = path.join(script_dir, "sounds/"+rnd_file)
 
         #opens file
         music_file = open(abs_file_path, 'rb')
@@ -64,6 +64,8 @@ def on_chat_message(msg):
         msg_id = msg['message_id']
 
         #sends it as voice message
+        bot.sendMessage(chat_id,"Fiel: "+ rnd_file)
+        bot.sendChatAction(chat_id, "sending_audio")
         bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
 
     elif (msg_text[:5] == "/help") or (msg_text[:6] == "/start"):
