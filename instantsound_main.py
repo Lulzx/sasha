@@ -51,6 +51,12 @@ def on_chat_message(msg):
         bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
 
 
+    elif (msg_text[:5] == "/help") or (msg_text[:6] == "/start"):
+        bot.sendMessage(chat_id,"HELP TUTORIAL SHIT")
+
+
+
+
 # def on_inline_query(msg):
 #     query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
 #     print 'Inline Query:', msg
