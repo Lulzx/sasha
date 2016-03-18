@@ -16,7 +16,7 @@ def on_chat_message(msg):
         pass
 
     # checks for /start command
-    elif (msg_text.startswith("/get")) or (msg_text.startswith("/get@instantsoundbot")):
+    elif msg_text.startswith("/get"):
         # absolute dir the script is in
         script_dir = path.dirname(__file__)
 
@@ -40,9 +40,10 @@ def on_chat_message(msg):
         msg_id = msg['message_id']
 
         #sends it as voice message
+        bot.sendChatAction(chat_id, "upload_audio")
         bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
 
-    elif (msg_text.startswith("/random")) or (msg_text.startswith("/random@instantsoundbot")):
+    elif msg_text.startswith("/random"):
         # absolute dir the script is in
         script_dir = path.dirname(__file__)
 
@@ -64,6 +65,7 @@ def on_chat_message(msg):
         msg_id = msg['message_id']
 
         #sends it as voice message
+        bot.sendChatAction(chat_id, "upload_audio")
         bot.sendMessage(chat_id,  rnd_file)
         bot.sendChatAction(chat_id, "upload_audio")
         bot.sendVoice(chat_id, music_file)
@@ -75,8 +77,29 @@ def on_chat_message(msg):
                         "commands:" + chr(10) +
                         "/get [file_name].mp4 -> eg. /get badumtss.mp4 sends badumtss.mp4"+ chr(10) +
                         "/get keyword -> for search "+ chr(10) +
-                        "/random -> sends random sound",
+                        "/random -> sends random sound"+
+                        "/list A -> lists all sounds who start with a",
                         parse_mode="Markdown")
+
+    elif (msg_text[:5] == "/list"):
+        #lists all sounds who start with x
+        key_letter = msg_text[6:8].lower()
+        print key_letter
+        # absolute dir the script is in
+        script_dir = path.dirname(__file__)
+
+        #file_list from directory /sounds
+        sounds_dir = path.join(script_dir, "sounds")
+        file_list = listdir(sounds_dir)
+
+        #creates a list of all filenames who start with x
+        list_x = []
+        for i in file_list:
+            if i.startswith(key_letter):
+                list_x = list_x.append(i)
+
+        bot.sendMessage(chat_id, list_x)
+
 
 
 
