@@ -25,13 +25,14 @@ app = Flask(__name__)
 
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
+    msg_text = msg['text']
     print 'Chat Message:', msg
 
     if content_type != "text":
         pass
 
     # checks for /start command
-    elif (msg['text'].startswith("/get")) or (msg['text'].startswith("/get@instantsoundbot")):
+    elif (msg_text.startswith("/get")) or (msg_text.startswith("/get@instantsoundbot")):
          #builds path to file
         script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
         rel_path = "sounds/badumtss.mp4"
@@ -40,27 +41,32 @@ def on_chat_message(msg):
         #opens file
         music_file = open(abs_file_path, 'rb')
 
+        #sends as file with title
+        #bot.sendAudio(chat_id, music_file, title='badumtss')
+
+        #gets message_id
+        msg_id = msg['message_id']
+
         #sends it as voice message
-        bot.sendAudio(chat_id, music_file, title='badumtss')
-        bot.sendVoice(chat_id, music_file)
+        bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
 
 
-def on_inline_query(msg):
-    query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
-    print 'Inline Query:', msg
-
-
-    # Compose your own answers
-    articles = [{'type': 'article',
-                    'id': '1', 'title': 'Badumtss', 'message_text': '/get@instantsoundbot badumtss'}]
-
-    bot.answerInlineQuery(query_id, articles)
-
-
-
-def on_chosen_inline_result(msg):
-    result_id, from_id, query_string = telepot.glance(msg, flavor='chosen_inline_result')
-    print 'Chosen Inline Result:', result_id, from_id, query_string
+# def on_inline_query(msg):
+#     query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
+#     print 'Inline Query:', msg
+#
+#
+#     # Compose your own answers
+#     articles = [{'type': 'article',
+#                     'id': '1', 'title': 'Badumtss', 'message_text': '/get@instantsoundbot badumtss'}]
+#
+#     bot.answerInlineQuery(query_id, articles)
+#
+#
+#
+# def on_chosen_inline_result(msg):
+#     result_id, from_id, query_string = telepot.glance(msg, flavor='chosen_inline_result')
+#     print 'Chosen Inline Result:', result_id, from_id, query_string
 
 
 
@@ -73,9 +79,7 @@ app = Flask(__name__)
 bot = telepot.Bot(TOKEN)
 update_queue = Queue()  # channel between `app` and `bot`
 
-bot.notifyOnMessage({'normal': on_chat_message,
-                     'inline_query': on_inline_query,
-                     'chosen_inline_result': on_chosen_inline_result}, source=update_queue) # take updates from queue
+bot.notifyOnMessage({'normal': on_chat_message}, source=update_queue) # take updates from queue
 
 
 
