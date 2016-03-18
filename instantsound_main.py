@@ -1,6 +1,7 @@
 from flask import Flask, request
 import telepot
 import base64
+import random
 from os import listdir, path
 from Queue import Queue
 app = Flask(__name__)
@@ -41,15 +42,38 @@ def on_chat_message(msg):
         #sends it as voice message
         bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
 
+    elif (msg_text.startswith("/random")) or (msg_text.startswith("/random@instantsoundbot")):
+        # absolute dir the script is in
+        script_dir = path.dirname(__file__)
+
+        #file_list from directory /sounds
+        sounds_dir = path.join(script_dir, "sounds")
+        file_list = listdir(sounds_dir)
+
+        #gets random number out length from file_list
+        rnd_num_filelist = random.randrange(0,len(file_list))
+
+        #builds path to file
+        abs_file_path = path.join(script_dir, "sounds/"+file_list[rnd_num_filelist])
+
+
+        #opens file
+        music_file = open(abs_file_path, 'rb')
+
+        #gets message_id
+        msg_id = msg['message_id']
+
+        #sends it as voice message
+        bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
 
     elif (msg_text[:5] == "/help") or (msg_text[:6] == "/start"):
         #sends /help and /Start message
         bot.sendMessage(chat_id,
                         "*Welcome to the instant sound bot*" + chr(10) +
                         "commands:" + chr(10) +
-                        "/get [file_name].mp4 -> returns badumtss.mp4"+ chr(10) +
+                        "/get [file_name].mp4 -> eg. /get badumtss.mp4 sends badumtss.mp4"+ chr(10) +
                         "/get keyword -> for search "+ chr(10) +
-                        "/get -> sends random sound",
+                        "/random -> sends random sound",
                         parse_mode="Markdown")
 
 
