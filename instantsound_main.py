@@ -52,7 +52,14 @@ def on_chat_message(msg):
 
 
     elif (msg_text[:5] == "/help") or (msg_text[:6] == "/start"):
-        bot.sendMessage(chat_id,"HELP TUTORIAL SHIT")
+        #sends /help and /Start message
+        bot.sendMessage(chat_id,
+                        "*Welcome to the instant sound bot*" + chr(10) +
+                        "commands:" + chr(10) +
+                        "/get [file_name].mp4 (eg badumtss.mp4)"+ chr(10) +
+                        "/get keyword for search"+ chr(10) +
+                        "/get random",
+                        parse_mode="Markdown")
 
 
 
