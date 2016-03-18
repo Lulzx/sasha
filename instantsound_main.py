@@ -93,7 +93,7 @@ def on_chat_message(msg):
         file_list = listdir(sounds_dir)
 
         #creates a list of all filenames who start with x
-        list_x = []
+        list_x = [None]
         for i in file_list:
             if i.startswith(key_letter):
                 list_x = list_x.append(i)
