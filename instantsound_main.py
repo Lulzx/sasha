@@ -77,7 +77,7 @@ def on_chat_message(msg):
                         "commands:" + chr(10) +
                         "/get [file_name].mp4 -> eg. /get badumtss.mp4 sends badumtss.mp4"+ chr(10) +
                         "/get keyword -> for search "+ chr(10) +
-                        "/random -> sends random sound"+
+                        "/random -> sends random sound"+ chr(10) +
                         "/list A -> lists all sounds who start with a",
                         parse_mode="Markdown")
 
