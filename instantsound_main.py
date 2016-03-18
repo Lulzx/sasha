@@ -56,9 +56,9 @@ def on_chat_message(msg):
         bot.sendMessage(chat_id,
                         "*Welcome to the instant sound bot*" + chr(10) +
                         "commands:" + chr(10) +
-                        "/get [file_name].mp4 (eg badumtss.mp4)"+ chr(10) +
-                        "/get keyword for search"+ chr(10) +
-                        "/get random",
+                        "/get [file_name].mp4 -> returns badumtss.mp4"+ chr(10) +
+                        "/get keyword -> for search "+ chr(10) +
+                        "/get -> sends random sound",
                         parse_mode="Markdown")
 
 
