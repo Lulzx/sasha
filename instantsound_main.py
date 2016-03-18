@@ -64,9 +64,9 @@ def on_chat_message(msg):
         msg_id = msg['message_id']
 
         #sends it as voice message
-        bot.sendMessage(chat_id,"Fiel: "+ rnd_file)
+        bot.sendMessage(chat_id,  rnd_file)
         bot.sendChatAction(chat_id, "upload_audio")
-        bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
+        bot.sendVoice(chat_id, music_file)
 
     elif (msg_text[:5] == "/help") or (msg_text[:6] == "/start"):
         #sends /help and /Start message
