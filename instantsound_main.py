@@ -79,12 +79,11 @@ def on_chat_message(msg):
     elif (msg_text[:5] == "/help") or (msg_text[:6] == "/start"):
 
         bot.sendMessage(chat_id,
-                        "*Welcome to the instant sound bot*\n"
-                        "\n"
-                        "*Commands:*\n"
+                        "*Welcome to the Instant Sound Bot*\n"
+                        "*Use the following commands:*\n"
                         "\n"
                         "`/get [file_name].mp4`\n"
-                        "--> eg. `/get badumtss.mp4`\n"
+                        "--> eg. '`/get badumtss.mp4`'\n"
                         "\n"
                         "`/search [keyword]` \n"
                         "--> search for a sound\n"
@@ -118,6 +117,8 @@ def on_chat_message(msg):
             for i in file_list:
                 if i.startswith(key_letter):
                     string_x = string_x + i + "\n"
+                else:
+                    string_x = "No sound with "+key_letter+" found"
 
 
             bot.sendMessage(chat_id, string_x, parse_mode="HTML")
