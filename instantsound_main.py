@@ -96,7 +96,9 @@ def on_chat_message(msg):
         print key_letter
 
         #checks if keyletter is specified
-        if key_letter != "":
+        if not key_letter :
+             bot.sendMessage(chat_id, "You need to specify a character\ne.g. /list A", parse_mode="Markdown")
+        else:
             # absolute dir the script is in
             script_dir = path.dirname(__file__)
 
@@ -112,8 +114,6 @@ def on_chat_message(msg):
 
             bot.sendMessage(chat_id, list_x, parse_mode="HTML")
 
-        else:
-            bot.sendMessage(chat_id, "You need to specify a character\ne.g. /list A", parse_mode="Markdown")
 
 
 
