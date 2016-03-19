@@ -80,17 +80,19 @@ def on_chat_message(msg):
 
         bot.sendMessage(chat_id,
                         "*Welcome to the instant sound bot*\n"
-                        "commands:\n"
-                        "/get [file_name].mp4\n"
-                        "--> eg. '/get badumtss.mp4'\n"
                         "\n"
-                        "/search [keyword] \n"
+                        "*Commands:*\n"
+                        "\n"
+                        "`/get [file_name].mp4`\n"
+                        "--> eg. `/get badumtss.mp4`\n"
+                        "\n"
+                        "`/search [keyword]` \n"
                         "--> search for a sound\n"
                         "\n"
-                        "/random\n"
+                        "`/random`\n"
                         "--> sends random sound\n "
                         "\n"
-                        "/list A \n"
+                        "`/list A` \n"
                         "--> lists all sounds who start with a",
                         parse_mode="Markdown")
 
