@@ -79,11 +79,14 @@ def on_chat_message(msg):
     elif (msg_text[:5] == "/help") or (msg_text[:6] == "/start"):
 
         bot.sendMessage(chat_id,
-                        "*Welcome to the instant sound bot*" + chr(10) +
-                        "commands:" + chr(10) +
-                        "/get [file_name].mp4 -> eg. /get badumtss.mp4 sends badumtss.mp4"+ chr(10) +
-                        "/get keyword -> for search "+ chr(10) +
-                        "/random -> sends random sound"+ chr(10) +
+                        "*Welcome to the instant sound bot*\n"
+                        "commands:\n"
+                        "*/get [file_name].mp4*\n"
+                        "--> eg. '/get badumtss.mp4' sends badumtss.mp4\n"
+                        "*/search [keyword]* \n"
+                        "--> for search\n"
+                        "/random\n"
+                        "--> sends random sound\n "
                         "/list A -> lists all sounds who start with a",
                         parse_mode="Markdown")
 
@@ -112,7 +115,7 @@ def on_chat_message(msg):
 
             bot.sendMessage(chat_id, list_x, parse_mode="HTML")
         else:
-            bot.sendMessage(chat_id, "You need to specify a character\ne.g. /list A", parse_mode="Markdown")
+            bot.sendMessage(chat_id, "You need to specify a character\ne.g. '/list A'", parse_mode="Markdown")
 
 
 
