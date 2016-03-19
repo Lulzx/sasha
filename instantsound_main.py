@@ -81,13 +81,17 @@ def on_chat_message(msg):
         bot.sendMessage(chat_id,
                         "*Welcome to the instant sound bot*\n"
                         "commands:\n"
-                        "*/get [file_name].mp4*\n"
-                        "--> eg. '/get badumtss.mp4' sends badumtss.mp4\n"
-                        "*/search [keyword]* \n"
-                        "--> for search\n"
+                        "/get [file_name].mp4\n"
+                        "--> eg. '/get badumtss.mp4'\n"
+                        "\n"
+                        "/search [keyword] \n"
+                        "--> search for a sound\n"
+                        "\n"
                         "/random\n"
                         "--> sends random sound\n "
-                        "/list A -> lists all sounds who start with a",
+                        "\n"
+                        "/list A \n"
+                        "--> lists all sounds who start with a",
                         parse_mode="Markdown")
 
 
@@ -108,12 +112,13 @@ def on_chat_message(msg):
             file_list = listdir(sounds_dir)
 
             #creates a list of all filenames who start with x
-            list_x = []
+            string_x = ""
             for i in file_list:
                 if i.startswith(key_letter):
-                    list_x.append(i)
+                    string_x = i + "\n"
 
-            bot.sendMessage(chat_id, list_x, parse_mode="HTML")
+
+            bot.sendMessage(chat_id, string_x, parse_mode="HTML")
         else:
             bot.sendMessage(chat_id, "You need to specify a character\ne.g. '/list A'", parse_mode="Markdown")
 
