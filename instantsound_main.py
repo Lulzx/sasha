@@ -115,7 +115,7 @@ def on_chat_message(msg):
             string_x = ""
             for i in file_list:
                 if i.startswith(key_letter):
-                    string_x = i + "\n"
+                    string_x = string_x + i + "\n"
 
 
             bot.sendMessage(chat_id, string_x, parse_mode="HTML")
