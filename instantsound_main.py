@@ -92,13 +92,11 @@ def on_chat_message(msg):
     #lists all sounds who start with x
     elif (msg_text[:5] == "/list"):
         #gets the key letter "/list [key]"
-        key_letter = msg_text[7].lower()
+        key_letter = msg_text[6].lower()
         print key_letter
 
         #checks if keyletter is specified
-        if not key_letter :
-             bot.sendMessage(chat_id, "You need to specify a character\ne.g. /list A", parse_mode="Markdown")
-        else:
+        if key_letter:
             # absolute dir the script is in
             script_dir = path.dirname(__file__)
 
@@ -113,8 +111,8 @@ def on_chat_message(msg):
                     list_x.append(i)
 
             bot.sendMessage(chat_id, list_x, parse_mode="HTML")
-
-
+        else:
+            bot.sendMessage(chat_id, "You need to specify a character\ne.g. /list A", parse_mode="Markdown")
 
 
 
