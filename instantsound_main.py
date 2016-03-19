@@ -96,7 +96,7 @@ def on_chat_message(msg):
         list_x = [None]
         for i in file_list:
             if i.startswith(key_letter):
-                list_x = list_x.append(i)
+                list_x.append(i)
 
         bot.sendMessage(chat_id, list_x)
 
