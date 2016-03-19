@@ -117,8 +117,10 @@ def on_chat_message(msg):
             for i in file_list:
                 if i.startswith(key_letter):
                     string_x = string_x + i + "\n"
-                else:
-                    string_x = "No sound with "+key_letter+" found"
+
+            #if no file is found
+            if not string_x:
+                string_x = "No sound with "+key_letter+" found"
 
 
             bot.sendMessage(chat_id, string_x, parse_mode="HTML")
