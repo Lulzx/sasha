@@ -43,6 +43,9 @@ def on_chat_message(msg):
         bot.sendChatAction(chat_id, "upload_audio")
         bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
 
+
+    ### /random command ###
+    #sends random soundfile from /sounds
     elif msg_text.startswith("/random"):
         # absolute dir the script is in
         script_dir = path.dirname(__file__)
@@ -65,13 +68,16 @@ def on_chat_message(msg):
         msg_id = msg['message_id']
 
         #sends it as voice message
-        bot.sendChatAction(chat_id, "upload_audio")
+        bot.sendChatAction(chat_id, "typing")
         bot.sendMessage(chat_id,  rnd_file)
         bot.sendChatAction(chat_id, "upload_audio")
         bot.sendVoice(chat_id, music_file)
 
+
+    ### /help command ###
+    #sends /help and /Start message
     elif (msg_text[:5] == "/help") or (msg_text[:6] == "/start"):
-        #sends /help and /Start message
+
         bot.sendMessage(chat_id,
                         "*Welcome to the instant sound bot*" + chr(10) +
                         "commands:" + chr(10) +
@@ -81,24 +87,34 @@ def on_chat_message(msg):
                         "/list A -> lists all sounds who start with a",
                         parse_mode="Markdown")
 
+
+    ### /list command ###
+    #lists all sounds who start with x
     elif (msg_text[:5] == "/list"):
-        #lists all sounds who start with x
+        #gets the key letter "/list [key]"
         key_letter = msg_text[6:8].lower()
         print key_letter
-        # absolute dir the script is in
-        script_dir = path.dirname(__file__)
 
-        #file_list from directory /sounds
-        sounds_dir = path.join(script_dir, "sounds")
-        file_list = listdir(sounds_dir)
+        #checks if keyletter is specified
+        if key_letter != None:
+            # absolute dir the script is in
+            script_dir = path.dirname(__file__)
 
-        #creates a list of all filenames who start with x
-        list_x = [None]
-        for i in file_list:
-            if i.startswith(key_letter):
-                list_x.append(i)
+            #file_list from directory /sounds
+            sounds_dir = path.join(script_dir, "sounds")
+            file_list = listdir(sounds_dir)
 
-        bot.sendMessage(chat_id, list_x)
+            #creates a list of all filenames who start with x
+            list_x = []
+            for i in file_list:
+                if i.startswith(key_letter):
+                    list_x.append(i)
+
+            bot.sendMessage(chat_id, list_x, parse_mode="HTML")
+
+        else:
+            bot.sendMessage(chat_id, "You need to specify a character\ne.g. /list A", parse_mode="Markdown")
+
 
 
 
