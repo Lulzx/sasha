@@ -110,20 +110,25 @@ def on_chat_message(msg):
 
             #file_list from directory /sounds
             sounds_dir = path.join(script_dir, "sounds")
-            file_list = listdir(sounds_dir)
+            #file_list = listdir(sounds_dir)
 
+
+            #get only the files who start with "x"
+            file_list = [f for f in listdir(sounds_dir) if f.startswith(key_letter)]
+            print file_list
             #creates a list of all filenames who start with x
             string_x = ""
             for i in file_list:
-                if i.startswith(key_letter):
-                    string_x = string_x + i + "\n"
+                string_x = string_x + i + "\n"
 
             #if no file is found
             if not string_x:
                 string_x = "No sound with "+key_letter+" found"
 
-
+            #sends out the string "sound1.mp4 \n sound2.mp4 \n....."
             bot.sendMessage(chat_id, string_x, parse_mode="HTML")
+
+        #sends message for input without character
         else:
             bot.sendMessage(chat_id, "You need to specify a character\ne.g. '/list A'", parse_mode="Markdown")
 
