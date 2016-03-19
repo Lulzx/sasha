@@ -46,7 +46,9 @@ def on_chat_message(msg):
 
         else:
             bot.sendChatAction(chat_id, "typing")
-            bot.sendMessage(chat_id, "Sorry no file '"+file_name+"' found.")
+            bot.sendMessage(chat_id, "Sorry no file '"+file_name+"' found."
+                                                                 "\nDid you forget '.mp4'?"
+                                                                 "\nDid you mean xy.mp4?")
 
 
     ### /random command ###
