@@ -15,33 +15,38 @@ def on_chat_message(msg):
     if content_type != "text":
         pass
 
-    # checks for /start command
+    # ### /get command ###
+    #sends file with given filename
     elif msg_text.startswith("/get"):
         # absolute dir the script is in
         script_dir = path.dirname(__file__)
 
-        #builds path to file
-        rel_path = "sounds/badumtss.mp4"
-        abs_file_path = path.join(script_dir, rel_path)
+        #gets the filename
+        file_name = msg_text[5:]
 
         #file_list from directory sounds/
         sounds_dir = path.join(script_dir, "sounds")
         file_list = listdir(sounds_dir)
-        print sounds_dir
-        print file_list
 
-        #opens file
-        music_file = open(abs_file_path, 'rb')
+        #checks if file is the directory/exists
+        if file_name in file_list:
+            #builds path to file
+            rel_path = "sounds/"+file_name
+            abs_file_path = path.join(script_dir, rel_path)
 
-        #sends as file with title
-        #bot.sendAudio(chat_id, music_file, title='badumtss')
+            #opens file
+            music_file = open(abs_file_path, 'rb')
 
-        #gets message_id
-        msg_id = msg['message_id']
+            #gets message_id for the reply title
+            msg_id = msg['message_id']
 
-        #sends it as voice message
-        bot.sendChatAction(chat_id, "upload_audio")
-        bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
+            #sends it as voice message with reply (used as "title")
+            bot.sendChatAction(chat_id, "upload_audio")
+            bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
+
+        else:
+            bot.sendChatAction(chat_id, "typing")
+            bot.sendMessage(chat_id, "Sorry no file '"+file_name+"' found.")
 
 
     ### /random command ###
@@ -101,7 +106,6 @@ def on_chat_message(msg):
     elif (msg_text[:5] == "/list"):
         #gets the key letter "/list [key]"
         key_letter = msg_text[6:8].lower()
-        print key_letter
 
         #checks if keyletter is specified
         if key_letter:
@@ -112,11 +116,10 @@ def on_chat_message(msg):
             sounds_dir = path.join(script_dir, "sounds")
             #file_list = listdir(sounds_dir)
 
-
             #get only the files who start with "x"
             file_list = [f for f in listdir(sounds_dir) if f.startswith(key_letter)]
-            print file_list
-            #creates a list of all filenames who start with x
+
+            #formats the file list
             string_x = ""
             for i in file_list:
                 string_x = string_x + i + "\n"
@@ -126,10 +129,12 @@ def on_chat_message(msg):
                 string_x = "No sound with "+key_letter+" found"
 
             #sends out the string "sound1.mp4 \n sound2.mp4 \n....."
+            bot.sendChatAction(chat_id, "typing")
             bot.sendMessage(chat_id, string_x, parse_mode="HTML")
 
         #sends message for input without character
         else:
+            bot.sendChatAction(chat_id, "typing")
             bot.sendMessage(chat_id, "You need to specify a character\ne.g. '/list A'", parse_mode="Markdown")
 
 
