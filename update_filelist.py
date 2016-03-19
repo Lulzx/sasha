@@ -1,4 +1,4 @@
 
 
-def updateFilelist():
+def setFilelist():
     print "test"

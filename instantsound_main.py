@@ -2,7 +2,7 @@ from flask import Flask, request
 import telepot
 import base64
 import random
-from update_filelist import updateFilelist
+from update_filelist import setFilelist
 from os import listdir, path
 from Queue import Queue
 app = Flask(__name__)
@@ -179,11 +179,11 @@ bot.notifyOnMessage({'normal': on_chat_message}, source=update_queue) # take upd
 @app.route('/'+TOKEN, methods=['GET', 'POST'])
 def pass_update():
     update_queue.put(request.data)  # pass update to bot
-    return 'OK'\
+    return 'OK'
 
-@app.route('/update_filelist', methods=['GET'])
-def start_update():
-    updateFilelist()  #updates the filelist --> see update_filelist.py
+@app.route('/updateFiellist', methods=['GET'])
+def start_filelist_update():
+    setFilelist()  #updates the filelist --> see update_filelist.py
     return 'OK'
 
 
