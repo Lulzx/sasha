@@ -61,7 +61,7 @@ def on_chat_message(msg):
                     suggestions = "\nDid you mean: \n" + suggestions
                 #no results = sorry message
                 else:
-                    suggestions = "Sorry no suggestions"
+                    suggestions = "\nSorry no suggestions"
 
                 bot.sendChatAction(chat_id, "typing")
                 bot.sendMessage(chat_id, "404, sound *"+file_name[:-4]+"* not found."+suggestions,
@@ -70,7 +70,7 @@ def on_chat_message(msg):
             #sends 404 and please 3 or more characters
             else:
                 bot.sendChatAction(chat_id, "typing")
-                bot.sendMessage(chat_id, "404, sound *"+file_name[:-4]+"* not found.\nPlease type 3 or more characters",
+                bot.sendMessage(chat_id, "404, sound *"+file_name[:-4]+"* not found.\nPlease type 3 or more characters\nOr try /list [x]" ,
                                 parse_mode="Markdown")
 
 
@@ -114,8 +114,8 @@ def on_chat_message(msg):
                         "`/random`\n"
                         "--> sends random sound\n "
                         "\n"
-                        "`/list A` \n"
-                        "--> lists all sounds who start with a",
+                        "`/list [x]` \n"
+                        "--> lists all sounds who start with [x]\n",
                         parse_mode="Markdown")
 
 
