@@ -50,7 +50,7 @@ def on_chat_message(msg):
         else:
             result = filter(lambda x: file_name[:-4] in x, file_set)
             bot.sendChatAction(chat_id, "typing")
-            bot.sendMessage(chat_id, "404, file *"+file_name[:-4]+"* not found.\nDid you mean "+result+" WIP", parse_mode="Markdown")
+            bot.sendMessage(chat_id, "404, file *"+file_name[:-4]+"* not found.\nDid you mean "+str(result)+" WIP", parse_mode="Markdown")
 
 
     ### /random command ###
