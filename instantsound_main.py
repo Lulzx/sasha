@@ -3,7 +3,7 @@ import telepot
 import base64
 import random
 import redis
-from update_filelist import setFilelist
+from update_filelist import setFilelist, createFile_listSet
 from os import listdir, path
 from Queue import Queue
 app = Flask(__name__)
@@ -187,7 +187,8 @@ def pass_update():
 
 @app.route('/updateFiellist', methods=['GET'])
 def start_filelist_update():
-    setFilelist()  #updates the filelist --> see update_filelist.py
+    setFilelist() #updates the filelist --> see update_filelist.py
+    createFile_listSet() #creates the filelist
     return 'OK'
 
 
