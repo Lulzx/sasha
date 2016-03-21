@@ -46,7 +46,7 @@ def on_chat_message(msg):
             bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
 
         else:
-            if len(file_name[:-4]) > 3:
+            if len(file_name[:-4]) >= 3:
                 result = filter(lambda x: file_name[:-4] in x, file_set)
                 suggestions = ""
                 for i in result:
@@ -58,7 +58,7 @@ def on_chat_message(msg):
 
 
             bot.sendChatAction(chat_id, "typing")
-            bot.sendMessage(chat_id, "404, file *"+file_name[:-4]+"* not found.\n Please type more than 3 characters",
+            bot.sendMessage(chat_id, "404, file *"+file_name[:-4]+"* not found.\nPlease type more than 3 characters",
                             parse_mode="Markdown")
 
 
