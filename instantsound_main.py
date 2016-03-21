@@ -17,21 +17,27 @@ def on_chat_message(msg):
     msg_text = msg['text']
     print 'Chat Message:', msg
 
+    # absolute dir the script is in
+    script_dir = path.dirname(__file__)
+    #directory /sounds
+    sounds_dir = path.join(script_dir, "sounds")
+
+
+    #gets the file_list from redis set
+    file_list = r.smembers("file_list")
+
+
     if content_type != "text":
         pass
 
     ### /get command ###
     #sends file with given filename
     elif msg_text.startswith("/get"):
-        # absolute dir the script is in
-        script_dir = path.dirname(__file__)
-
         #gets the filename
-        file_name = msg_text[5:]
+        file_name = msg_text[5:]+".mp4"
 
-        #file_list from directory sounds/
-        sounds_dir = path.join(script_dir, "sounds")
-        file_list = listdir(sounds_dir)
+        print file_list
+
 
         #checks if file is the directory/exists
         if file_name in file_list:
@@ -52,18 +58,14 @@ def on_chat_message(msg):
         else:
             bot.sendChatAction(chat_id, "typing")
             bot.sendMessage(chat_id, "Sorry no file '"+file_name+"' found."
-                                                                 "\nDid you forget '.mp4'?"
-                                                                 "\nDid you mean xy.mp4?")
+                                                                 "\nDid you mean xy.mp4? WIP")
 
 
     ### /random command ###
     #sends random soundfile from /sounds
     elif msg_text.startswith("/random"):
-        # absolute dir the script is in
-        script_dir = path.dirname(__file__)
 
-        #file_list from directory /sounds
-        sounds_dir = path.join(script_dir, "sounds")
+
         file_list = listdir(sounds_dir)
 
         #gets random number out length from file_list
@@ -116,12 +118,6 @@ def on_chat_message(msg):
 
         #checks if keyletter is specified
         if key_letter:
-            # absolute dir the script is in
-            script_dir = path.dirname(__file__)
-
-            #file_list from directory /sounds
-            sounds_dir = path.join(script_dir, "sounds")
-            #file_list = listdir(sounds_dir)
 
             #get only the files who start with "x"
             file_list = [f for f in listdir(sounds_dir) if f.startswith(key_letter)]
