@@ -72,7 +72,37 @@ def on_chat_message(msg):
                 bot.sendChatAction(chat_id, "typing")
                 bot.sendMessage(chat_id, "404, sound *"+file_name[:-4]+"* not found.\nPlease type 3 or more characters\nOr try /list [x]" ,
                                 parse_mode="Markdown")
+    ### /random command ###
+    #sends random soundfile from /sounds
+    elif msg_text.startswith("/search"):
 
+        key_words = msg_text[8:]
+
+        #checks if input is more than >= 3
+        if len(msg_text) >= 3:
+            #filters the file_set for matching strings
+            result = filter(lambda x: key_words in x, file_set)
+
+            #if results are found, format them
+            if result:
+                suggestions = ""
+                #formats the found results
+                for i in result:
+                    suggestions = suggestions + i[:-4] + "\n"
+                suggestions = "\nDid you mean: \n" + suggestions
+                #no results = sorry message
+            else:
+                suggestions = "\nSorry no suggestions"
+
+            bot.sendChatAction(chat_id, "typing")
+            bot.sendMessage(chat_id, "404, sound *"+key_words+"* not found."+suggestions,
+                                parse_mode="Markdown")
+
+            #sends 404 and please 3 or more characters
+        else:
+            bot.sendChatAction(chat_id, "typing")
+            bot.sendMessage(chat_id, "404, sound *"+key_words+"* not found.\nPlease type 3 or more characters\nOr try /list [x]" ,
+                                parse_mode="Markdown")
 
     ### /random command ###
     #sends random soundfile from /sounds
