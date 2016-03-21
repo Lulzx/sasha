@@ -97,7 +97,6 @@ def on_chat_message(msg):
                 if key_words[:1] != "q":
                     suggestions = "No search results found! \n*Recommendations:*\n"\
                                   + r.srandmember("sounds:"+key_words[:1])+"\n" \
-                                  + r.srandmember("sounds:"+key_words[:1])+"\n" \
                                   + r.srandmember("sounds:"+key_words[:1])
                 else:
                     suggestions = "No search results found!"
@@ -159,9 +158,9 @@ def on_chat_message(msg):
 
     ### /list command ###
     #lists all sounds who start with [x]
-    elif (msg_text.startswith("/list")) and (msg_text[5:7] == " "):
+    elif (msg_text.startswith("/list")) and (msg_text[5:6] == " "):
         #gets the key letter "/list [key]"
-        key_letter = msg_text[6:8].lower()
+        key_letter = msg_text[6:7].lower()
 
         #pics all sounds who start with [x]
         file_set = r.smembers("sounds:"+key_letter)
