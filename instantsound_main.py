@@ -2,10 +2,14 @@ from flask import Flask, request
 import telepot
 import base64
 import random
+import redis
 from update_filelist import setFilelist
 from os import listdir, path
 from Queue import Queue
 app = Flask(__name__)
+
+r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
+
 
 
 def on_chat_message(msg):
@@ -16,7 +20,7 @@ def on_chat_message(msg):
     if content_type != "text":
         pass
 
-    # ### /get command ###
+    ### /get command ###
     #sends file with given filename
     elif msg_text.startswith("/get"):
         # absolute dir the script is in
