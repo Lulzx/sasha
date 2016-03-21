@@ -111,7 +111,7 @@ def on_chat_message(msg):
 
         #pics all sounds who start with [x]
         #file_list = [f for f in file_set if f[0] == key_letter]
-        file_set = r.smembers("souns:"+key_letter)
+        file_set = r.smembers("sounds:"+key_letter)
 
         #checks if keyletter is specified
         if key_letter:
