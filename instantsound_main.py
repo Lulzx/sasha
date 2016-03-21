@@ -26,7 +26,7 @@ def on_chat_message(msg):
 
     ### /get command ###
     #sends file with given filename
-    elif (msg_text.startswith("/get")) and (msg_text[5] == " ") :
+    elif (msg_text.startswith("/get")) and (msg_text[4] == " ") :
         #gets the filename
         file_name = msg_text[5:]+".mp4"
 
