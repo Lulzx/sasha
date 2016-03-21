@@ -72,6 +72,8 @@ def on_chat_message(msg):
                 bot.sendChatAction(chat_id, "typing")
                 bot.sendMessage(chat_id, "404, sound *"+file_name[:-4]+"* not found.\nPlease type 3 or more characters\nOr try `/list [x]`" ,
                                 parse_mode="Markdown")
+
+
     ### /random command ###
     #sends random soundfile from /sounds
     elif msg_text.startswith("/search"):
@@ -134,7 +136,7 @@ def on_chat_message(msg):
 
     ### /help command ###
     #sends /help and /Start message
-    elif (msg_text[:5] == "/help") or (msg_text[:6] == "/start"):
+    elif (msg_text.startswith("/help")) or (msg_text.startswith("/start")):
 
         bot.sendMessage(chat_id,
                         "*--- Instant Sound Bot ---*\n"
@@ -157,7 +159,7 @@ def on_chat_message(msg):
 
     ### /list command ###
     #lists all sounds who start with [x]
-    elif (msg_text[:5] == "/list"):
+    elif (msg_text.startswith("/list")) and (msg_text[5:7] == " "):
         #gets the key letter "/list [key]"
         key_letter = msg_text[6:8].lower()
 
