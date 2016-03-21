@@ -26,7 +26,7 @@ def on_chat_message(msg):
 
     ### /get command ###
     #sends file with given filename
-    elif msg_text.startswith("/get"):
+    elif (msg_text.startswith("/get")) and (msg_text[5] == " ") :
         #gets the filename
         file_name = msg_text[5:]+".mp4"
 
@@ -76,7 +76,7 @@ def on_chat_message(msg):
 
     ### /random command ###
     #sends random soundfile from /sounds
-    elif msg_text.startswith("/search"):
+    elif (msg_text.startswith("/search")) and (msg_text[7] == " "):
 
         key_words = msg_text[8:].lower()
 
@@ -134,7 +134,7 @@ def on_chat_message(msg):
 
 
     ### /help command ###
-    #sends /help and /Start message
+    #sends /help and /start message
     elif (msg_text.startswith("/help")) or (msg_text.startswith("/start")):
 
         bot.sendMessage(chat_id,
@@ -158,7 +158,7 @@ def on_chat_message(msg):
 
     ### /list command ###
     #lists all sounds who start with [x]
-    elif (msg_text.startswith("/list")) and (msg_text[5:6] == " "):
+    elif (msg_text.startswith("/list")) and (msg_text[5] == " "):
         #gets the key letter "/list [key]"
         key_letter = msg_text[6:7].lower()
 
