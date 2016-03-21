@@ -87,7 +87,7 @@ def on_chat_message(msg):
     elif (msg_text[:5] == "/help") or (msg_text[:6] == "/start"):
 
         bot.sendMessage(chat_id,
-                        "*Welcome to the Instant Sound Bot*\n"
+                        "*--- Instant Sound Bot ---*\n"
                         "*Use the following commands:*\n"
                         "\n"
                         "`/get [file_name].mp4`\n"
@@ -138,7 +138,7 @@ def on_chat_message(msg):
         #sends message for input without character
         else:
             bot.sendChatAction(chat_id, "typing")
-            bot.sendMessage(chat_id, "You need to specify a character\ne.g. '/list A'", parse_mode="Markdown")
+            bot.sendMessage(chat_id, "You need to specify a character\ne.g. `'/list a'`", parse_mode="Markdown")
 
 
 
