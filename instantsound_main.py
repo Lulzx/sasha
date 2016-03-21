@@ -185,7 +185,7 @@ def pass_update():
     update_queue.put(request.data)  # pass update to bot
     return 'OK'
 
-@app.route('/updateFiellist', methods=['GET'])
+@app.route('/updateFilelist', methods=['GET'])
 def start_filelist_update():
     setFilelist() #updates the filelist --> see update_filelist.py
     createFile_listSet() #creates the filelist
