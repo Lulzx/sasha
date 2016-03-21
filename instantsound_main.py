@@ -79,7 +79,7 @@ def on_chat_message(msg):
         key_words = msg_text[8:].lower()
 
         #checks if input is more than >= 2
-        if len(key_words) >= 2:
+        if len(key_words) >= 2 and key_words.isalpha():
             #filters the file_set for matching strings
             result = filter(lambda x: key_words in x, file_set)
 
