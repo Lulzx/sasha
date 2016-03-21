@@ -52,14 +52,14 @@ def on_chat_message(msg):
                 #filters the file_set for matching strings
                 result = filter(lambda x: file_name[:-4] in x, file_set)
 
-                #formats the found results
-                suggestions = ""
-                for i in result:
-                    suggestions = suggestions + i[:-4] + "\n"
-                suggestions = "\nDid you mean: \n" + suggestions
-
-                #if no results are found "Sorry"
-                if not suggestions:
+                #if results are found, format them
+                if result:
+                    #formats the found results
+                    for i in result:
+                        suggestions = suggestions + i[:-4] + "\n"
+                    suggestions = "\nDid you mean: \n" + suggestions
+                #no results = sorry message
+                else:
                     suggestions = "Sorry no suggestions"
 
                 bot.sendChatAction(chat_id, "typing")
