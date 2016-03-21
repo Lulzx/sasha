@@ -54,6 +54,7 @@ def on_chat_message(msg):
 
                 #if results are found, format them
                 if result:
+                    suggestions = ""
                     #formats the found results
                     for i in result:
                         suggestions = suggestions + i[:-4] + "\n"
