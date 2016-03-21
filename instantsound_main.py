@@ -17,8 +17,6 @@ def on_chat_message(msg):
     # absolute dir the script is in
     script_dir = path.dirname(__file__)
 
-
-
     #gets the file_list from redis set
     file_set = r.smembers("file_list")
 
@@ -48,9 +46,20 @@ def on_chat_message(msg):
             bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
 
         else:
-            result = filter(lambda x: file_name[:-4] in x, file_set)
+            if len(file_name[:-4]) > 3:
+                result = filter(lambda x: file_name[:-4] in x, file_set)
+                suggestions = ""
+                for i in result:
+                    suggestions = suggestions + i[:-4] + "\n"
+                bot.sendChatAction(chat_id, "typing")
+                bot.sendMessage(chat_id, "404, file *"+file_name[:-4]+"* not found."
+                                                                  "\nDid you mean: \n"+suggestions+" WIP",
+                            parse_mode="Markdown")
+
+
             bot.sendChatAction(chat_id, "typing")
-            bot.sendMessage(chat_id, "404, file *"+file_name[:-4]+"* not found.\nDid you mean "+str(result)+" WIP", parse_mode="Markdown")
+            bot.sendMessage(chat_id, "404, file *"+file_name[:-4]+"* not found.\n Please type more than 3 characters",
+                            parse_mode="Markdown")
 
 
     ### /random command ###
