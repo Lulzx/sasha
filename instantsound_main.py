@@ -1,10 +1,9 @@
 from flask import Flask, request
 import telepot
 import base64
-import random
 import redis
 from update_filelist import createFile_Set, createFile_Setx
-from os import listdir, path
+from os import path
 from Queue import Queue
 app = Flask(__name__)
 
@@ -49,8 +48,9 @@ def on_chat_message(msg):
             bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
 
         else:
+            result = filter(lambda x: file_name[:-4] in x, file_set)
             bot.sendChatAction(chat_id, "typing")
-            bot.sendMessage(chat_id, "404, file *"+file_name[:-4]+"* not found.\nDid you mean xy.mp4? WIP", parse_mode="Markdown")
+            bot.sendMessage(chat_id, "404, file *"+file_name[:-4]+"* not found.\nDid you mean "+result+" WIP", parse_mode="Markdown")
 
 
     ### /random command ###
