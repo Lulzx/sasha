@@ -115,7 +115,7 @@ def on_chat_message(msg):
             string_x = ""
             for i in file_list:
                 if i[0] == key_letter:
-                    string_x = string_x[:-4] + i + "\n"
+                    string_x = string_x + i[:-4] + "\n"
 
             #if no file is found
             if not string_x:
