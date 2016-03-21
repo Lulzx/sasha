@@ -36,9 +36,6 @@ def on_chat_message(msg):
         #gets the filename
         file_name = msg_text[5:]+".mp4"
 
-        print file_list
-
-
         #checks if file is the directory/exists
         if file_name in file_list:
             #builds path to file
@@ -57,16 +54,12 @@ def on_chat_message(msg):
 
         else:
             bot.sendChatAction(chat_id, "typing")
-            bot.sendMessage(chat_id, "Sorry no file '"+file_name+"' found."
-                                                                 "\nDid you mean xy.mp4? WIP")
+            bot.sendMessage(chat_id, "404, file _"+file_name[:-4]+"_ not found.\nDid you mean xy.mp4? WIP")
 
 
     ### /random command ###
     #sends random soundfile from /sounds
     elif msg_text.startswith("/random"):
-
-
-        file_list = listdir(sounds_dir)
 
         #gets random number out length from file_list
         rnd_num_filelist = random.randrange(0,len(file_list))
@@ -118,18 +111,15 @@ def on_chat_message(msg):
 
         #checks if keyletter is specified
         if key_letter:
-
-            #get only the files who start with "x"
-            file_list = [f for f in listdir(sounds_dir) if f.startswith(key_letter)]
-
             #formats the file list
             string_x = ""
             for i in file_list:
-                string_x = string_x + i + "\n"
+                if i[0] == key_letter:
+                    string_x = string_x[:-4] + i + "\n"
 
             #if no file is found
             if not string_x:
-                string_x = "No sound with "+key_letter+" found"
+                string_x = "No files with _"+key_letter+"_ found"
 
             #sends out the string "sound1.mp4 \n sound2.mp4 \n....."
             bot.sendChatAction(chat_id, "typing")
