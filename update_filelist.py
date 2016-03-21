@@ -9,11 +9,10 @@ script_dir = path.dirname(__file__)
 sounds_dir = path.join(script_dir, "sounds")
 file_list = listdir(sounds_dir)
 
-#creates a file list in redis -  sound:[filename].mp4 -> filename
-def setFilelist():
-    #write to redis datastore sound:[filename].mp4 -> filename
-    r.flushdb()
-    print "DB FLUSHED"
+#flushed DB, cleanup before renewing
+# def flushDB():
+#     r.flushdb()
+#     print "--- DB FLUSHED ----"
 
 
 #creates a set with all filenames

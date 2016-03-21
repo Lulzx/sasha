@@ -3,7 +3,7 @@ import telepot
 import base64
 import random
 import redis
-from update_filelist import setFilelist, createFile_Set, createFile_Setx
+from update_filelist import createFile_Set, createFile_Setx
 from os import listdir, path
 from Queue import Queue
 app = Flask(__name__)
@@ -110,14 +110,15 @@ def on_chat_message(msg):
         key_letter = msg_text[6:8].lower()
 
         #pics all sounds who start with [x]
-        file_list = [f for f in file_set if f[0] == key_letter]
+        #file_list = [f for f in file_set if f[0] == key_letter]
+        file_set = r.smembers("souns:"+key_letter)
 
         #checks if keyletter is specified
         if key_letter:
 
             #formats the file list
             string_x = ""
-            for i in file_list:
+            for i in file_set:
                 string_x = string_x + i[:-4] + "\n"
 
             #if no file is found
@@ -176,9 +177,8 @@ def pass_update():
 
 @app.route('/updateFilelist', methods=['GET'])
 def start_filelist_update():
-    setFilelist() #updates the filelist --> see update_filelist.py
-    createFile_Set() #creates the file_set
-    createFile_Setx() #creates sets for all starting letters
+    createFile_Set() #creates the file_set --> see update_filelist.py
+    createFile_Setx() #creates sets for all starting letters --> see update_filelist.py
     return 'OK'
 
 
