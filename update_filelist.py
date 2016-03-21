@@ -13,6 +13,7 @@ file_list = listdir(sounds_dir)
 def setFilelist():
     #write to redis datastore sound:[filename].mp4 -> filename
     r.flushdb()
+    print "DB FLUSHED"
 
 
 #creates a set with all filenames
@@ -29,5 +30,6 @@ def createFile_Setx():
               'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']:
         files_with_x = [f for f in listdir(sounds_dir) if f[0] == i]
         for j in files_with_x:
-            r.sadd("sounds:"+j, j)
-            print r.smembers("sounds:"+j)
+            r.sadd("sounds:"+i, j)
+
+        print r.smembers("sounds:"+i)
