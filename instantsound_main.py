@@ -64,7 +64,7 @@ def on_chat_message(msg):
                     suggestions = "\nSorry no suggestions available"
 
                 bot.sendChatAction(chat_id, "typing")
-                bot.sendMessage(chat_id, "404, sound *"+file_name[:-4]+"* not found."+suggestions,
+                bot.sendMessage(chat_id, "`404`\n sound *"+file_name[:-4]+"* not found."+suggestions,
                                 parse_mode="Markdown")
 
             #sends 404 and please 3 or more characters
