@@ -30,7 +30,7 @@ def on_chat_message(msg):
         #gets the filename
         file_name = msg_text[5:]+".mp4"
 
-        #checks if file is the directory/exists
+        #checks if file is in the file_set/exists
         if file_name in file_set:
             #builds path to file
             file_path = path.join(script_dir, "sounds/"+file_name)
@@ -45,21 +45,32 @@ def on_chat_message(msg):
             bot.sendChatAction(chat_id, "upload_audio")
             bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
 
+        #if file doesn't exist this will send a message and suggestions is >= 3 characters long
         else:
+            #checks if input is more than >= 3
             if len(file_name[:-4]) >= 3:
+                #filters the file_set for matching strings
                 result = filter(lambda x: file_name[:-4] in x, file_set)
+
+                #formats the found results
                 suggestions = ""
                 for i in result:
                     suggestions = suggestions + i[:-4] + "\n"
+                suggestions = "\nDid you mean: \n" + suggestions
+
+                #if no results are found "Sorry"
+                if not suggestions:
+                    suggestions = "Sorry no suggestions"
+
                 bot.sendChatAction(chat_id, "typing")
-                bot.sendMessage(chat_id, "404, file *"+file_name[:-4]+"* not found."
-                                                                  "\nDid you mean: \n"+suggestions+" WIP",
-                            parse_mode="Markdown")
+                bot.sendMessage(chat_id, "404, sound *"+file_name[:-4]+"* not found."+suggestions,
+                                parse_mode="Markdown")
 
-
-            bot.sendChatAction(chat_id, "typing")
-            bot.sendMessage(chat_id, "404, file *"+file_name[:-4]+"* not found.\nPlease type more than 3 characters",
-                            parse_mode="Markdown")
+            #sends 404 and please 3 or more characters
+            else:
+                bot.sendChatAction(chat_id, "typing")
+                bot.sendMessage(chat_id, "404, sound *"+file_name[:-4]+"* not found.\nPlease type 3 or more characters",
+                                parse_mode="Markdown")
 
 
     ### /random command ###
