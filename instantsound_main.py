@@ -61,7 +61,7 @@ def on_chat_message(msg):
                     suggestions = "\nDid you mean: \n" + suggestions
                 #no results = sorry message
                 else:
-                    suggestions = "\nSorry no suggestions"
+                    suggestions = "\nSorry no suggestions available"
 
                 bot.sendChatAction(chat_id, "typing")
                 bot.sendMessage(chat_id, "404, sound *"+file_name[:-4]+"* not found."+suggestions,
@@ -70,7 +70,7 @@ def on_chat_message(msg):
             #sends 404 and please 3 or more characters
             else:
                 bot.sendChatAction(chat_id, "typing")
-                bot.sendMessage(chat_id, "404, sound *"+file_name[:-4]+"* not found.\nPlease type 3 or more characters\nOr try `/list [x]`" ,
+                bot.sendMessage(chat_id, "`404`\nsound *"+file_name[:-4]+"* not found.\nPlease type 3 or more characters\nOr try `/list [x]`" ,
                                 parse_mode="Markdown")
 
 
@@ -95,6 +95,7 @@ def on_chat_message(msg):
             else:
                 #for special case where q is first letter
                 if key_words[:1] != "q":
+                    #todo dont show duplicate results
                     suggestions = "No search results found! \n*Recommendations:*\n"\
                                   + r.srandmember("sounds:"+key_words[:1])[:-4]+"\n" \
                                   + r.srandmember("sounds:"+key_words[:1])[:-4]
