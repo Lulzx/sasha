@@ -10,8 +10,6 @@ app = Flask(__name__)
 
 r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
 
-
-
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
     msg_text = msg['text']
@@ -19,8 +17,7 @@ def on_chat_message(msg):
 
     # absolute dir the script is in
     script_dir = path.dirname(__file__)
-    #directory /sounds
-    sounds_dir = path.join(script_dir, "sounds")
+
 
 
     #gets the file_list from redis set
@@ -39,11 +36,10 @@ def on_chat_message(msg):
         #checks if file is the directory/exists
         if file_name in file_set:
             #builds path to file
-            rel_path = "sounds/"+file_name
-            abs_file_path = path.join(script_dir, rel_path)
+            file_path = path.join(script_dir, "sounds/"+file_name)
 
             #opens file
-            music_file = open(abs_file_path, 'rb')
+            music_file = open(file_path, 'rb')
 
             #gets message_id for the reply title
             msg_id = msg['message_id']
@@ -54,7 +50,7 @@ def on_chat_message(msg):
 
         else:
             bot.sendChatAction(chat_id, "typing")
-            bot.sendMessage(chat_id, "404, file _"+file_name[:-4]+"_ not found.\nDid you mean xy.mp4? WIP", parse_mode="Markdown")
+            bot.sendMessage(chat_id, "404, file *"+file_name[:-4]+"* not found.\nDid you mean xy.mp4? WIP", parse_mode="Markdown")
 
 
     ### /random command ###
@@ -62,14 +58,13 @@ def on_chat_message(msg):
     elif msg_text.startswith("/random"):
 
         #gets random number out length from file_list
-        rnd_num_filelist = random.randrange(0,len(file_set))
-        rnd_file= file_set[rnd_num_filelist]
+        rnd_file = r.srandmember("file_list")
 
         #builds path to file
-        abs_file_path = path.join(script_dir, "sounds/"+rnd_file)
+        file_path = path.join(script_dir, "sounds/"+rnd_file)
 
         #opens file
-        music_file = open(abs_file_path, 'rb')
+        music_file = open(file_path, 'rb')
 
         #gets message_id
         msg_id = msg['message_id']
@@ -110,7 +105,6 @@ def on_chat_message(msg):
         key_letter = msg_text[6:8].lower()
 
         #pics all sounds who start with [x]
-        #file_list = [f for f in file_set if f[0] == key_letter]
         file_set = r.smembers("sounds:"+key_letter)
 
         #checks if keyletter is specified
@@ -123,7 +117,7 @@ def on_chat_message(msg):
 
             #if no file is found
             if not string_x:
-                string_x = "No files with _"+key_letter+"_ found"
+                string_x = "No files with *"+key_letter+"* found"
 
             #sends out the string "sound1.mp4 \n sound2.mp4 \n....."
             bot.sendChatAction(chat_id, "typing")
