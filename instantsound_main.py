@@ -54,7 +54,7 @@ def on_chat_message(msg):
 
         else:
             bot.sendChatAction(chat_id, "typing")
-            bot.sendMessage(chat_id, "404, file _"+file_name[:-4]+"_ not found.\nDid you mean xy.mp4? WIP")
+            bot.sendMessage(chat_id, "404, file _"+file_name[:-4]+"_ not found.\nDid you mean xy.mp4? WIP", parse_mode="Markdown")
 
 
     ### /random command ###
@@ -89,8 +89,8 @@ def on_chat_message(msg):
                         "*--- Instant Sound Bot ---*\n"
                         "*Use the following commands:*\n"
                         "\n"
-                        "`/get [file_name].mp4`\n"
-                        "--> eg. '`/get badumtss.mp4`'\n"
+                        "`/get [file_name]`\n"
+                        "--> eg. '`/get badumtss`'\n"
                         "\n"
                         "`/search [keyword]` \n"
                         "--> search for a sound\n"
@@ -113,6 +113,7 @@ def on_chat_message(msg):
         if key_letter:
             #formats the file list
             string_x = ""
+            file_list.sort()
             for i in file_list:
                 if i[0] == key_letter:
                     string_x = string_x + i[:-4] + "\n"
@@ -123,7 +124,7 @@ def on_chat_message(msg):
 
             #sends out the string "sound1.mp4 \n sound2.mp4 \n....."
             bot.sendChatAction(chat_id, "typing")
-            bot.sendMessage(chat_id, string_x, parse_mode="HTML")
+            bot.sendMessage(chat_id, string_x, parse_mode="Markdown")
 
         #sends message for input without character
         else:
