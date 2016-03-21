@@ -96,8 +96,8 @@ def on_chat_message(msg):
                 #for special case where q is first letter
                 if key_words[:1] != "q":
                     suggestions = "No search results found! \n*Recommendations:*\n"\
-                                  + r.srandmember("sounds:"+key_words[:1])+"\n" \
-                                  + r.srandmember("sounds:"+key_words[:1])
+                                  + r.srandmember("sounds:"+key_words[:1])[:-4]+"\n" \
+                                  + r.srandmember("sounds:"+key_words[:1])[:-4]
                 else:
                     suggestions = "No search results found!"
             bot.sendChatAction(chat_id, "typing")
