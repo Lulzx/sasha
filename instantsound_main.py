@@ -78,8 +78,8 @@ def on_chat_message(msg):
 
         key_words = msg_text[8:]
 
-        #checks if input is more than >= 3
-        if len(msg_text) >= 2:
+        #checks if input is more than >= 2
+        if len(key_words) >= 2:
             #filters the file_set for matching strings
             result = filter(lambda x: key_words in x, file_set)
 
@@ -139,6 +139,7 @@ def on_chat_message(msg):
                         "\n"
                         "`/search [keyword]` \n"
                         "--> search for a sound\n"
+                        "--> requires at least 2 characters\n"
                         "\n"
                         "`/random`\n"
                         "--> sends random sound\n "
