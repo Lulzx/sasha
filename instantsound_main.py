@@ -76,7 +76,7 @@ def on_chat_message(msg):
     #sends random soundfile from /sounds
     elif msg_text.startswith("/search"):
 
-        key_words = msg_text[8:]
+        key_words = msg_text[8:].lower()
 
         #checks if input is more than >= 2
         if len(key_words) >= 2:
@@ -91,11 +91,14 @@ def on_chat_message(msg):
                     suggestions = suggestions + i[:-4] + "\n"
             #no results =  No results found and 3 random suggestions
             else:
-                suggestions = "No search results found! \nRecommendations:\n"\
-                              + r.srandmember("sounds:"+key_words[:1])+"\n" \
-                              + r.srandmember("sounds:"+key_words[:1])+"\n" \
-                              + r.srandmember("sounds:"+key_words[:1])
-
+                #for special case where q is first letter
+                if key_words[:1] != "q":
+                    suggestions = "No search results found! \n*Recommendations:*\n"\
+                                  + r.srandmember("sounds:"+key_words[:1])+"\n" \
+                                  + r.srandmember("sounds:"+key_words[:1])+"\n" \
+                                  + r.srandmember("sounds:"+key_words[:1])
+                else:
+                    suggestions = "No search results found!"
             bot.sendChatAction(chat_id, "typing")
             bot.sendMessage(chat_id, "*Results:*\n"+suggestions,
                                 parse_mode="Markdown")
