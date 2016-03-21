@@ -89,9 +89,12 @@ def on_chat_message(msg):
                 #formats the found results
                 for i in result:
                     suggestions = suggestions + i[:-4] + "\n"
-            #no results =  No results found
+            #no results =  No results found and 3 random suggestions
             else:
-                suggestions = "\nNo search results found!"
+                suggestions = "No search results found! \nRecommendations:\n"\
+                              + r.srandmember("sounds:"+key_words[:1])+"\n" \
+                              + r.srandmember("sounds:"+key_words[:1])+"\n" \
+                              + r.srandmember("sounds:"+key_words[:1])
 
             bot.sendChatAction(chat_id, "typing")
             bot.sendMessage(chat_id, "*Results:*\n"+suggestions,
