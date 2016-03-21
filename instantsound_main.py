@@ -3,7 +3,7 @@ import telepot
 import base64
 import random
 import redis
-from update_filelist import setFilelist, createFile_listSet
+from update_filelist import setFilelist, createFile_Set, createFile_Setx
 from os import listdir, path
 from Queue import Queue
 app = Flask(__name__)
@@ -24,7 +24,7 @@ def on_chat_message(msg):
 
 
     #gets the file_list from redis set
-    file_list = r.smembers("file_list")
+    file_set = r.smembers("file_list")
 
 
     if content_type != "text":
@@ -37,7 +37,7 @@ def on_chat_message(msg):
         file_name = msg_text[5:]+".mp4"
 
         #checks if file is the directory/exists
-        if file_name in file_list:
+        if file_name in file_set:
             #builds path to file
             rel_path = "sounds/"+file_name
             abs_file_path = path.join(script_dir, rel_path)
@@ -62,8 +62,8 @@ def on_chat_message(msg):
     elif msg_text.startswith("/random"):
 
         #gets random number out length from file_list
-        rnd_num_filelist = random.randrange(0,len(file_list))
-        rnd_file= file_list[rnd_num_filelist]
+        rnd_num_filelist = random.randrange(0,len(file_set))
+        rnd_file= file_set[rnd_num_filelist]
 
         #builds path to file
         abs_file_path = path.join(script_dir, "sounds/"+rnd_file)
@@ -104,19 +104,20 @@ def on_chat_message(msg):
 
 
     ### /list command ###
-    #lists all sounds who start with x
+    #lists all sounds who start with [x]
     elif (msg_text[:5] == "/list"):
         #gets the key letter "/list [key]"
         key_letter = msg_text[6:8].lower()
 
-        file_list = [f for f in file_list if f[0] == key_letter]
+        #pics all sounds who start with [x]
+        file_list = [f for f in file_set if f[0] == key_letter]
 
         #checks if keyletter is specified
         if key_letter:
+
             #formats the file list
             string_x = ""
             for i in file_list:
-                #if i[0] == key_letter:
                 string_x = string_x + i[:-4] + "\n"
 
             #if no file is found
@@ -176,7 +177,8 @@ def pass_update():
 @app.route('/updateFilelist', methods=['GET'])
 def start_filelist_update():
     setFilelist() #updates the filelist --> see update_filelist.py
-    createFile_listSet() #creates the filelist
+    createFile_Set() #creates the file_set
+    createFile_Setx() #creates sets for all starting letters
     return 'OK'
 
 
