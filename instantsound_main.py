@@ -70,7 +70,7 @@ def on_chat_message(msg):
             #sends 404 and please 3 or more characters
             else:
                 bot.sendChatAction(chat_id, "typing")
-                bot.sendMessage(chat_id, "404, sound *"+file_name[:-4]+"* not found.\nPlease type 3 or more characters\nOr try /list [x]" ,
+                bot.sendMessage(chat_id, "404, sound *"+file_name[:-4]+"* not found.\nPlease type 3 or more characters\nOr try `/list [x]`" ,
                                 parse_mode="Markdown")
     ### /random command ###
     #sends random soundfile from /sounds
@@ -79,7 +79,7 @@ def on_chat_message(msg):
         key_words = msg_text[8:]
 
         #checks if input is more than >= 3
-        if len(msg_text) >= 3:
+        if len(msg_text) >= 2:
             #filters the file_set for matching strings
             result = filter(lambda x: key_words in x, file_set)
 
@@ -89,19 +89,18 @@ def on_chat_message(msg):
                 #formats the found results
                 for i in result:
                     suggestions = suggestions + i[:-4] + "\n"
-                suggestions = "\nDid you mean: \n" + suggestions
-                #no results = sorry message
+            #no results =  No results found
             else:
-                suggestions = "\nSorry no suggestions"
+                suggestions = "\nNo search results found!"
 
             bot.sendChatAction(chat_id, "typing")
-            bot.sendMessage(chat_id, "404, sound *"+key_words+"* not found."+suggestions,
+            bot.sendMessage(chat_id, "*Results:*\n"+suggestions,
                                 parse_mode="Markdown")
 
-            #sends 404 and please 3 or more characters
+        #sends
         else:
             bot.sendChatAction(chat_id, "typing")
-            bot.sendMessage(chat_id, "404, sound *"+key_words+"* not found.\nPlease type 3 or more characters\nOr try /list [x]" ,
+            bot.sendMessage(chat_id, "Please type 2 or more characters\nOr try `/list [x]`" ,
                                 parse_mode="Markdown")
 
     ### /random command ###
