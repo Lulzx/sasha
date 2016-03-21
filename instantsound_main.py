@@ -76,7 +76,7 @@ def on_chat_message(msg):
 
         #sends it as voice message
         bot.sendChatAction(chat_id, "typing")
-        bot.sendMessage(chat_id,  rnd_file)
+        bot.sendMessage(chat_id,  rnd_file[:-4])
         bot.sendChatAction(chat_id, "upload_audio")
         bot.sendVoice(chat_id, music_file)
 
@@ -109,14 +109,15 @@ def on_chat_message(msg):
         #gets the key letter "/list [key]"
         key_letter = msg_text[6:8].lower()
 
+        file_list = [f for f in file_list if f[0] == key_letter]
+
         #checks if keyletter is specified
         if key_letter:
             #formats the file list
             string_x = ""
-            file_list.sort()
             for i in file_list:
-                if i[0] == key_letter:
-                    string_x = string_x + i[:-4] + "\n"
+                #if i[0] == key_letter:
+                string_x = string_x + i[:-4] + "\n"
 
             #if no file is found
             if not string_x:
