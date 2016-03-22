@@ -64,7 +64,7 @@ def on_chat_message(msg):
                     suggestions = "\nSorry no suggestions available"
 
                 bot.sendChatAction(chat_id, "typing")
-                bot.sendMessage(chat_id, "`404`\n sound *"+file_name[:-4]+"* not found."+suggestions,
+                bot.sendMessage(chat_id, "`404`\nsound *"+file_name[:-4]+"* not found."+suggestions,
                                 parse_mode="Markdown")
 
             #sends 404 and please 3 or more characters
@@ -167,7 +167,7 @@ def on_chat_message(msg):
         file_set = r.smembers("sounds:"+key_letter)
 
         #checks if keyletter is specified
-        if key_letter:
+        if key_letter and key_letter.isalpha():
 
             #formats the file list
             string_x = ""
