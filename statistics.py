@@ -48,10 +48,11 @@ def get_stats():
     #iterates from startdate to enddate
     start_date = date(2016, 03, 20)
     end_date = date_today
-    print date_today
+    date_list = []
     for single_date in daterange(start_date, end_date):
+        date_list.append(single_date.strftime('%d/%m/%Y'))
         print single_date.strftime('%d/%m/%Y')
 
 
-    return stats
+    return stats, date_list
 

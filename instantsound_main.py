@@ -242,7 +242,7 @@ def start_filelist_update():
 
 @app.route('/stats', methods=['GET'])
 def show_stats():
-    stats = get_stats() #gets the values from statistics.py
+    stats, date_list = get_stats() #gets the values from statistics.py
     return render_template('stats.html', **locals())
 
 
