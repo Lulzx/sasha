@@ -3,7 +3,7 @@ import telepot
 import base64
 import redis
 from update_filelist import createFile_Set, createFile_Setx
-from statistics import get_stats
+from statistics import get_stats, write_user_stats
 from os import path
 from Queue import Queue
 app = Flask(__name__)
@@ -188,6 +188,8 @@ def on_chat_message(msg):
             bot.sendChatAction(chat_id, "typing")
             bot.sendMessage(chat_id, "You need to specify a character\ne.g. `'/list a'`", parse_mode="Markdown")
 
+    #writes user stats
+    write_user_stats(chat_id)
 
 
 
