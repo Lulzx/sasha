@@ -47,8 +47,8 @@ def get_stats():
 
     #iterates from startdate to enddate
     start_date = date(2016, 03, 20)
-    end_date = date(2016, 03, 23)
-    print "test"
+    end_date = date_today
+    print date_today
     for single_date in daterange(start_date, end_date):
         print single_date.strftime('%d/%m/%Y')
 
