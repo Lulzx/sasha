@@ -49,10 +49,11 @@ def get_stats():
     start_date = date(2016, 03, 20)
     end_date = date_today
     date_list = []
+    daily_requests = []
     for single_date in daterange(start_date, end_date):
         date_list.append(single_date.strftime('%d/%m/%Y'))
-        print single_date.strftime('%d/%m/%Y')
+        daily_requests.append(r_stats.get("requests:"+single_date.strftime('%d/%m/%Y')))
 
 
-    return stats, date_list
+    return stats, date_list, daily_requests
 
