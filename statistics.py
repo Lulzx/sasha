@@ -46,8 +46,9 @@ def get_stats():
              'requests_today':r_stats.get("requests:"+today)}
 
     #iterates from startdate to enddate
-    start_date = date(2016, 3, 20)
-    end_date = date_today
+    start_date = date(2016, 03, 20)
+    end_date = date(2016, 03, 23)
+    print "test"
     for single_date in daterange(start_date, end_date):
         print single_date.strftime('%d/%m/%Y')
 
