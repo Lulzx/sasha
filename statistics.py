@@ -46,7 +46,7 @@ def get_stats():
              'requests_today':r_stats.get("requests:"+today)}
 
     #iterates from startdate to enddate
-    start_date = date(2016, 03, 20)
+    start_date = date(2016, 03, 23)
     end_date = date_today
     date_list = []
     daily_requests = []
