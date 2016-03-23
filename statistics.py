@@ -54,5 +54,5 @@ def get_stats():
         print single_date.strftime('%d/%m/%Y')
 
 
-    return stats, date_list.decode('UTF-8')
+    return stats, date_list
 
