@@ -18,11 +18,11 @@ def write_user_stats(chat_id):
 
     #total requests
     r_stats.incr("requests_total")
-    print "All requests: "+ str(r_stats.get("requests_total"))
+    print "Requests total: "+ str(r_stats.get("requests_total"))
 
     #dayli requests
     r_stats.incr("requests:"+today)
-    print "All requests: "+ str(r_stats.get("requests"+today))
+    print "Requests today: "+ str(r_stats.get("requests"+today))
 
 
 def write_sound_stats():
