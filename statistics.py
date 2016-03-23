@@ -4,6 +4,9 @@ from datetime import date, timedelta
 #redis database 1 --> statistics database
 r_stats = redis.StrictRedis(host='127.2.73.2', port=16379, db=1, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
 
+#redis database 0 for fileset
+r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
+
 date_today = date.today()
 today = date_today.strftime('%d/%m/%Y')
 
@@ -47,7 +50,7 @@ def get_stats():
 
     #iterates from startdate to enddate
     start_date = date(2016, 03, 23)
-    end_date = date(2016, 03, 24)
+    end_date = date_today
     date_list = []
     daily_requests = []
     for single_date in daterange(start_date, end_date):
@@ -55,5 +58,8 @@ def get_stats():
         daily_requests.append(r_stats.get("requests:"+single_date.strftime('%d/%m/%Y')))
 
 
-    return stats, date_list, daily_requests
+    #gets the file_list from redis set
+    file_set = r.smembers("file_list")
+
+    return stats, date_list, daily_requests, file_set
 
