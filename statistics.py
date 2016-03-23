@@ -4,7 +4,8 @@ from datetime import date, timedelta
 #redis database 1 --> statistics database
 r_stats = redis.StrictRedis(host='127.2.73.2', port=16379, db=1, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
 
-today = date.today()
+date_today = date.today()
+today = date_today.strftime('%d/%m/%Y')
 
 #writes every chat_id into "unique_users" set - alltime and daily
 def write_user_stats(chat_id):
