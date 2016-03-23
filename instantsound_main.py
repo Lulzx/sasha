@@ -242,7 +242,7 @@ def start_filelist_update():
 
 @app.route('/stats', methods=['GET'])
 def show_stats():
-    unique_users, test, tost = get_stats() #gets the values from statistics.py
+    unique_users, unique_users_today, date_stats, requests_total, requests_today = get_stats() #gets the values from statistics.py
     return render_template('stats.html', **locals())
 
 
