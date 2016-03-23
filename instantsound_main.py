@@ -235,7 +235,7 @@ def start_filelist_update():
     createFile_Setx() #creates sets for all starting letters --> see update_filelist.py
     return 'OK'
 
-@app.route('stats', methods=['GET'])
+@app.route('/stats', methods=['GET'])
 def show_stats():
     name, test, tost = get_stats()
     return render_template('stats.html', **locals())
