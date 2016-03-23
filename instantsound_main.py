@@ -1,8 +1,9 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 import telepot
 import base64
 import redis
 from update_filelist import createFile_Set, createFile_Setx
+from statistics import get_stats
 from os import path
 from Queue import Queue
 app = Flask(__name__)
@@ -233,6 +234,12 @@ def start_filelist_update():
     createFile_Set() #creates the file_set --> see update_filelist.py
     createFile_Setx() #creates sets for all starting letters --> see update_filelist.py
     return 'OK'
+
+@app.route('stats', methods=['GET'])
+def show_stats():
+    name, test, tost = get_stats()
+    return render_template('stats.html', **locals())
+
 
 
 
