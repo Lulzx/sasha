@@ -53,8 +53,6 @@ def get_stats():
         date_list.append(single_date.strftime('%d/%m/%Y'))
         print single_date.strftime('%d/%m/%Y')
 
-    date_list = date_list.decode('UTF-8')
-    print "Test: "+ date_list
 
     return stats, date_list
 
