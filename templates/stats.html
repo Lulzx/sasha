@@ -3,14 +3,14 @@
     <title>instantsound bot statistics</title>
 </head>
 
-    <h1>Unique users (incl. groupchats): {{ unique_users }}</h1>
-    <h1>Request total: {{ requests_total }}</h1>
+    <h1>Unique users (incl. groupchats): {{ stats['unique_users'] }}</h1>
+    <h1>Request total: {{ stats['requests_total'] }}</h1>
 
 
 
-    <h1>Date: {{ date_stats }}</h1>
-    <h1>Unique users today: {{ unique_users_today }} </h1>
-    <h1>Request today: {{ requests_today }} </h1>
+    <h1>Date: {{ stats['stats_date'] }}</h1>
+    <h1>Unique users today: {{ stats['unique_users_today'] }} </h1>
+    <h1>Request today: {{ stats['requests_today'] }} </h1>
 
 
 

@@ -33,11 +33,16 @@ def write_sound_stats():
 
 
 def get_stats():
-    date_stats = today
-    unique_users = len(r_stats.smembers("unique_users"))
-    unique_users_today = len(r_stats.smembers("unique_users:"+today))
-    requests_total = r_stats.get("requests_total")
-    requests_today = r_stats.get("requests:"+today)
+    #stats_date = today
+    stats = {'stats_date': today,
+             'unique_users': len(r_stats.smembers("unique_users")),
+             'unique_users_today': len(r_stats.smembers("unique_users")),
+             'requests_total': r_stats.get("requests_total"),
+             'requests_today':r_stats.get("requests:"+today)}
+    # unique_users = len(r_stats.smembers("unique_users"))
+    # unique_users_today = len(r_stats.smembers("unique_users:"+today))
+    # requests_total = r_stats.get("requests_total")
+    # requests_today = r_stats.get("requests:"+today)
 
-    return unique_users, unique_users_today, date_stats, requests_total, requests_today
+    return stats
 
