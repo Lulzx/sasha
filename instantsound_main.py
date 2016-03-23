@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_from_directory
 import telepot
 import base64
 import redis
@@ -244,6 +244,10 @@ def start_filelist_update():
 def show_stats():
     stats, date_list = get_stats() #gets the values from statistics.py
     return render_template('stats.html', **locals())
+
+@app.route('/<path:resource>')
+def serveStaticResource(resource):
+    return send_from_directory('static/', resource)
 
 
 if __name__ == '__main__':
