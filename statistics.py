@@ -47,7 +47,7 @@ def get_stats():
 
     #iterates from startdate to enddate
     start_date = date(2016, 03, 23)
-    end_date = date_today
+    end_date = date(2016, 03, 24)
     date_list = []
     daily_requests = []
     for single_date in daterange(start_date, end_date):
