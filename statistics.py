@@ -59,7 +59,7 @@ def get_stats():
 
 
     #gets the file_list from redis set
-    file_set = r.smembers("file_list")
+    file_set = list(r.smembers("file_list"))
 
     return stats, date_list, daily_requests, file_set
 
