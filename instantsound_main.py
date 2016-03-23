@@ -13,7 +13,6 @@ r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
     msg_text = msg['text']
-    print 'Chat Message:', msg
 
     # absolute dir the script is in
     script_dir = path.dirname(__file__)
@@ -188,8 +187,12 @@ def on_chat_message(msg):
             bot.sendChatAction(chat_id, "typing")
             bot.sendMessage(chat_id, "You need to specify a character\ne.g. `'/list a'`", parse_mode="Markdown")
 
+    #prints chat message for debuging
+    print 'Chat Message:', msg
     #writes user stats
     write_user_stats(chat_id)
+
+
 
 
 
@@ -239,10 +242,8 @@ def start_filelist_update():
 
 @app.route('/stats', methods=['GET'])
 def show_stats():
-    name, test, tost = get_stats()
+    unique_users, test, tost = get_stats() #gets the values from statistics.py
     return render_template('stats.html', **locals())
-
-
 
 
 if __name__ == '__main__':
