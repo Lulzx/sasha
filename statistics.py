@@ -33,6 +33,6 @@ def write_sound_stats():
 
 
 def get_stats():
-    unique_users = str(len(r_stats.smembers("unique_users")))
+    unique_users = len(r_stats.smembers("unique_users"))
     return unique_users, "boob", "boobie"
 
