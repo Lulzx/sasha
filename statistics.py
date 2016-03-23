@@ -30,19 +30,27 @@ def write_sound_stats():
     stest = ""
 
 
+# generator function used to iterate over date range
+def daterange(start_date, end_date):
+    for n in range(int ((end_date - start_date).days)):
+        yield start_date + timedelta(n)
+
 
 
 def get_stats():
-    #stats_date = today
+    #writes all stats in a dictionary and returns the dict
     stats = {'stats_date': today,
              'unique_users': len(r_stats.smembers("unique_users")),
              'unique_users_today': len(r_stats.smembers("unique_users")),
              'requests_total': r_stats.get("requests_total"),
              'requests_today':r_stats.get("requests:"+today)}
-    # unique_users = len(r_stats.smembers("unique_users"))
-    # unique_users_today = len(r_stats.smembers("unique_users:"+today))
-    # requests_total = r_stats.get("requests_total")
-    # requests_today = r_stats.get("requests:"+today)
+
+    #iterates from startdate to enddate
+    start_date = date(2016, 3, 20)
+    end_date = date_today
+    for single_date in daterange(start_date, end_date):
+        print single_date.strftime('%d/%m/%Y')
+
 
     return stats
 
