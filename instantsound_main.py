@@ -161,6 +161,7 @@ def on_chat_message(msg):
                         "\n"
                         "Rate this bot:\n"
                         "telegram.me/storebot?start=instantsoundbot",
+                        disable_web_page_preview=True,
                         parse_mode="Markdown")
 
 
