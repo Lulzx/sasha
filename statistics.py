@@ -86,4 +86,4 @@ def get_sound_stats():
             sound_stats[i] = r_stats.get(i)
     print sound_stats
 
-    return "test"
+    return sound_stats
