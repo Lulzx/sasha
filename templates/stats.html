@@ -65,8 +65,9 @@
           <tr><th>Sound</th><th>Usage</th></tr>
         </thead>
         <tbody>
-
-            <tr><td> Key </td><td> Val </td></tr>
+            {% for key, value in sound_stats.iteritems() %}
+                <tr><td> {{ key }} </td><td> {{ value }} </td></tr>
+            {% endfor %}
         </tbody>
         <tfoot>
           <tr><td>TOTAL</td><td>{{ stats['sounds_sent'] }}</td></tr>
