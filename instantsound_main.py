@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, send_from_directory
 import telepot
 import base64
 import redis
+import json
 from update_filelist import createFile_Set, createFile_Setx
 from statistics import get_stats, get_sound_stats, write_user_stats, write_sound_stats
 from os import path
@@ -245,8 +246,8 @@ def start_filelist_update():
 @app.route('/stats', methods=['GET'])
 def show_stats():
     stats, date_list, daily_requests = get_stats() #gets the values from statistics.py
-    #sound_stats = get_sound_stats()
-    return render_template('stats.html', stats, date_list, daily_requests)
+    sound_stats = json.dumps(get_sound_stats())
+    return render_template('stats.html', **locals())
 
 
 
