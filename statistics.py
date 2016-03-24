@@ -64,8 +64,9 @@ def get_stats():
 
     #gets the file_list from redis set
     file_set = list(r.smembers("file_list"))
-    sound_stats = {}
 
+    #makes a dict with filename and usage stat {filename.mp4: 12}
+    sound_stats = {}
     for i in file_set:
         if r_stats.get(i):
             sound_stats[i] = r_stats.get(i)
