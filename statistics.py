@@ -71,7 +71,7 @@ def get_stats():
         date_list.append(single_date.strftime('%d/%m/%Y'))
         daily_requests.append(r_stats.get("requests:"+single_date.strftime('%d/%m/%Y')))
 
-    return (stats, date_list, daily_requests)
+    return (stats, date_list)
 
 
 
