@@ -61,6 +61,14 @@ def get_stats():
              'requests_today':r_stats.get("requests:"+today),
              'sounds_sent': r_stats.get("sounds_sent")}
 
+    #gets the file_list from redis set
+    file_set = list(r.smembers("file_list"))
+
+    #makes a dict with filename and usage stat {filename.mp4: 12}
+    sound_stats = {}
+    for i in file_set:
+        if r_stats.get(i):
+            sound_stats[i] = r_stats.get(i)
 
     #iterates from startdate to enddate
     start_date = date(2016, 03, 23)
@@ -71,19 +79,7 @@ def get_stats():
         date_list.append(single_date.strftime('%d/%m/%Y'))
         daily_requests.append(r_stats.get("requests:"+single_date.strftime('%d/%m/%Y')))
 
-    return (stats, date_list, daily_requests)
+    return (stats, date_list, daily_requests, sound_stats)
 
 
 
-def get_sound_stats():
-    #gets the file_list from redis set
-    file_set = list(r.smembers("file_list"))
-
-    #makes a dict with filename and usage stat {filename.mp4: 12}
-    sound_stats = {}
-    for i in file_set:
-        if r_stats.get(i):
-            sound_stats[i] = r_stats.get(i)
-    print sound_stats
-
-    return sound_stats
