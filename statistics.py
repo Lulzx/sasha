@@ -70,7 +70,6 @@ def get_stats():
     for i in file_set:
         if r_stats.get(i):
             sound_stats[i] = r_stats.get(i)
-    print sound_stats
 
     #iterates from startdate to enddate
     start_date = date(2016, 03, 23)
