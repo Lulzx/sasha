@@ -156,7 +156,11 @@ def on_chat_message(msg):
                         "--> sends random sound\n "
                         "\n"
                         "`/list [x]` \n"
-                        "--> lists all sounds who start with [x]\n",
+                        "--> eg. '`/list a`'\n"
+                        "--> lists all sounds who start with a\n"
+                        "\n"
+                        "Rate this bot:\n"
+                        "telegram.me/storebot?start=instantsoundbot",
                         parse_mode="Markdown")
 
 
