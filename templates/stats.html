@@ -14,65 +14,63 @@
         }
     </style>
 </head>
+    <div>
+        <div style="float: left; width: 70%">
 
-    <h2>Unique users (incl. groupchats): {{ stats['unique_users'] }}</h2>
-    <h2>Request total: {{ stats['requests_total'] }}</h2>
-    <h2>Sounds sent: {{ stats['sounds_sent'] }}</h2>
+            <h2>Unique users (incl. groupchats): {{ stats['unique_users'] }}</h2>
+            <h2>Request total: {{ stats['requests_total'] }}</h2>
+            <h2>Sounds sent: {{ stats['sounds_sent'] }}</h2>
 
-    <br>
-    _________________________________________________________________________________________
+            <br>
+            _________________________________________________________________________________________
 
-    <h2>Date: {{ stats['stats_date'] }}</h2>
-    <h2>Unique users today: {{ stats['unique_users_today'] }} </h2>
-    <h2>Request today: {{ stats['requests_today'] }} </h2>
+            <h2>Date: {{ stats['stats_date'] }}</h2>
+            <h2>Unique users today: {{ stats['unique_users_today'] }} </h2>
+            <h2>Request today: {{ stats['requests_today'] }} </h2>
 
-    <br>
-    _________________________________________________________________________________________
+            <br>
+            _________________________________________________________________________________________
 
-    <h2>Chart shows the numbers of daily request (all requests)</h2>
-    <canvas id="LineChart" width="800" height="400"></canvas>
-    <script>
+            <h2>Chart shows the numbers of daily request (all requests)</h2>
+            <canvas id="LineChart" width="800" height="400"></canvas>
+            <script>
 
-        var data = {
-            labels: {{date_list | safe}},
-            datasets: [
-                {
-                    label: "My First dataset",
-                    fillColor: "rgba(220,220,220,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: {{ daily_requests | safe }}
-                }
-            ]
-        };
+                var data = {
+                    labels: {{date_list | safe}},
+                    datasets: [
+                        {
+                            label: "My First dataset",
+                            fillColor: "rgba(220,220,220,0.2)",
+                            strokeColor: "rgba(220,220,220,1)",
+                            pointColor: "rgba(220,220,220,1)",
+                            pointStrokeColor: "#fff",
+                            pointHighlightFill: "#fff",
+                            pointHighlightStroke: "rgba(220,220,220,1)",
+                            data: {{ daily_requests | safe }}
+                        }
+                    ]
+                };
 
-        // Get the context of the canvas element we want to select
-        var ctx = document.getElementById("LineChart").getContext("2d");
-        var myLineChart = new Chart(ctx).Line(data);
-    </script>
+                // Get the context of the canvas element we want to select
+                var ctx = document.getElementById("LineChart").getContext("2d");
+                var myLineChart = new Chart(ctx).Line(data);
+            </script>
+        </div>
 
-    <br>
-    _________________________________________________________________________________________
-    <br>
-
-    <h2>{{ sound_stats | safe }} </h2>
-
-    <table class="sortable">
-        <thead>
-          <tr><th>Sound</th><th>Usage</th></tr>
-        </thead>
-        <tbody>
-            {% for key, value in sound_stats.iteritems() %}
-                <tr><td> {{ key }} </td><td> {{ value }} </td></tr>
-            {% endfor %}
-        </tbody>
-        <tfoot>
-          <tr><td>TOTAL</td><td>{{ stats['sounds_sent'] }}</td></tr>
-        </tfoot>
-    </table>
-
-
+        <div style="float: right; width: 30%">
+            <table class="sortable">
+                <thead>
+                  <tr><th>Sound</th><th>Usage</th></tr>
+                </thead>
+                <tbody>
+                    {% for key, value in sound_stats.iteritems() %}
+                        <tr><td> {{ key }} </td><td> {{ value }} </td></tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                  <tr><td>TOTAL</td><td>{{ stats['sounds_sent'] }}</td></tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
 </html>
