@@ -1,8 +1,18 @@
 <!doctype html>
 <script type="text/javascript" src="/static/Chart.js"></script>
+<script type="text/javascript" src="/static/sorttable.js"></script>
 
 <head>
     <title>instantsound bot statistics</title>
+    <style>
+        /* Sortable tables */
+        table.sortable thead {
+            background-color:#eee;
+            color:#666666;
+            font-weight: bold;
+            cursor: default;
+        }
+    </style>
 </head>
 
     <h2>Unique users (incl. groupchats): {{ stats['unique_users'] }}</h2>
@@ -10,14 +20,16 @@
     <h2>Sounds sent: {{ stats['sounds_sent'] }}</h2>
 
     <br>
-    <br>
-
+    ---------------------------------------------------------------------------
 
     <h2>Date: {{ stats['stats_date'] }}</h2>
     <h2>Unique users today: {{ stats['unique_users_today'] }} </h2>
     <h2>Request today: {{ stats['requests_today'] }} </h2>
 
+    <br>
+    ---------------------------------------------------------------------------
 
+    <h2>Chart shows the numbers of daily request (all requests)</h2>
     <canvas id="LineChart" width="800" height="400"></canvas>
     <script>
 
@@ -42,6 +54,22 @@
         var myLineChart = new Chart(ctx).Line(data);
 
     </script>
+
+    <table class="sortable">
+        <thead>
+          <tr><th>Sound</th><th>Usage</th></tr>
+        </thead>
+        <tbody>
+            {% for key, value in sound_stats %}
+                <tr><td>{{ key }}</td><td>{{ value }}</td></tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr><td>TOTAL</td><td>stats['sounds_sent']</td></tr>
+        </tfoot>
+
+
+    </table>
 
 
 </html>
