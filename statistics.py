@@ -7,11 +7,14 @@ r_stats = redis.StrictRedis(host='127.2.73.2', port=16379, db=1, password="ZTNiM
 #redis database 0 for fileset
 r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
 
-date_today = date.today()
-today = date_today.strftime('%d/%m/%Y')
+
 
 #writes every chat_id into "unique_users" set - alltime and daily
 def write_user_stats(chat_id):
+
+    date_today = date.today()
+    today = date_today.strftime('%d/%m/%Y')
+
     #unique users alltime
     r_stats.sadd("unique_users", chat_id)
     print "Unique users: "+ str(len(r_stats.smembers("unique_users")))
@@ -41,6 +44,10 @@ def daterange(start_date, end_date):
 
 
 def get_stats():
+    date_today = date.today()
+    today = date_today.strftime('%d/%m/%Y')
+
+
     #writes all stats in a dictionary and returns the dict
     stats = {'stats_date': today,
              'unique_users': len(r_stats.smembers("unique_users")),
