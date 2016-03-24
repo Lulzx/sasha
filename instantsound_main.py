@@ -245,7 +245,7 @@ def start_filelist_update():
 
 @app.route('/stats', methods=['GET'])
 def show_stats():
-    stats, date_list = get_stats() #gets the values from statistics.py
+    stats, date_list, daily_requests = get_stats() #gets the values from statistics.py
     #sound_stats = get_sound_stats()
     return render_template('stats.html', **locals())
 
