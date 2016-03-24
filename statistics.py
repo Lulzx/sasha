@@ -84,5 +84,6 @@ def get_sound_stats():
     for i in file_set:
         if r_stats.get(i):
             sound_stats[i] = r_stats.get(i)
+    print sound_stats
 
-    return sound_stats
+    return {'badumtss.mp4': '1', 'trollolol.mp4': '1'}
