@@ -3,7 +3,7 @@ import telepot
 import base64
 import redis
 from update_filelist import createFile_Set, createFile_Setx
-from statistics import get_stats, write_user_stats
+from statistics import get_stats, write_user_stats, write_sound_stats
 from os import path
 from Queue import Queue
 app = Flask(__name__)
@@ -44,6 +44,7 @@ def on_chat_message(msg):
             #sends it as voice message with reply (used as "title")
             bot.sendChatAction(chat_id, "upload_audio")
             bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
+            write_sound_stats(file_name)
 
         #if file doesn't exist this will send a message and suggestions is >= 3 characters long
         else:
@@ -132,6 +133,7 @@ def on_chat_message(msg):
         bot.sendMessage(chat_id,  rnd_file[:-4])
         bot.sendChatAction(chat_id, "upload_audio")
         bot.sendVoice(chat_id, music_file)
+        write_sound_stats(rnd_file)
 
 
     ### /help command ###
