@@ -86,4 +86,4 @@ def get_sound_stats():
             sound_stats[i] = r_stats.get(i)
     print sound_stats
 
-    return {'badumtss.mp4': '1', 'trollolol.mp4': '1'}
+    return "test"
