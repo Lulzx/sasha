@@ -204,14 +204,21 @@ def on_chat_message(msg):
         #gets the new sounds out of datastore
         file_set_new = r.smembers("file_list_new")
 
-        #formats the file list
-        new_sounds = ""
-        for i in file_set_new:
-            new_sounds = new_sounds + i[:-4] + "\n"
+        #only if file_set_new has content
+        if file_set_new:
+            #formats the file list
+            new_sounds = ""
+            for i in file_set_new:
+                new_sounds = new_sounds + i[:-4] + "\n"
 
-        #sends out the string "sound1.ogg \n sound2.ogg \n....."
-        bot.sendChatAction(chat_id, "typing")
-        bot.sendMessage(chat_id, new_sounds, parse_mode="Markdown")
+            #sends out the string "sound1.ogg \n sound2.ogg \n....."
+            bot.sendChatAction(chat_id, "typing")
+            bot.sendMessage(chat_id, new_sounds, parse_mode="Markdown")
+        else:
+            #sends nothing new
+            bot.sendChatAction(chat_id, "typing")
+            bot.sendMessage(chat_id, "Nothing new!")
+
 
 
 
