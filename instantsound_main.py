@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, send_from_directory
 import telepot
 import base64
 import redis
-from update_filelist import createFile_Set, createFile_Setx, flushDB
+from update_filelist import createFile_Set, createFile_Setx
 from statistics import get_stats, write_user_stats, write_sound_stats
 from os import path
 from Queue import Queue
@@ -267,7 +267,6 @@ def pass_update():
 
 @app.route('/updateFilelist', methods=['GET'])
 def start_filelist_update():
-    flushDB()
     createFile_Set() #creates the file_set --> see update_filelist.py
     createFile_Setx() #creates sets for all starting letters --> see update_filelist.py
     return 'OK'
