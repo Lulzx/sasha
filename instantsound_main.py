@@ -158,6 +158,10 @@ def on_chat_message(msg):
                         "--> eg. '`/list a`'\n"
                         "--> lists all sounds who start with a\n"
                         "\n"
+                        "\n"
+                        "`/new` \n"
+                        "--> shows all new sounds"
+                        "\n"
                         "Rate this bot:\n"
                         "telegram.me/storebot?start=instantsoundbot",
                         disable_web_page_preview=True,
@@ -193,6 +197,26 @@ def on_chat_message(msg):
         else:
             bot.sendChatAction(chat_id, "typing")
             bot.sendMessage(chat_id, "You need to specify a character\ne.g. `'/list a'`", parse_mode="Markdown")
+
+
+    ### /list command ###
+    #lists all sounds who start with [x]
+    elif (msg_text.startswith("/new")):
+
+        #gets the new sounds out of datastore
+        file_set_new = r.smembers("file_list_new")
+
+        #formats the file list
+        new_sounds = ""
+        for i in file_set_new:
+            new_sounds = new_sounds + i[:-4] + "\n"
+
+        #sends out the string "sound1.ogg \n sound2.ogg \n....."
+        bot.sendChatAction(chat_id, "typing")
+        bot.sendMessage(chat_id, new_sounds, parse_mode="Markdown")
+
+
+
 
     #prints chat message for debuging
     print 'Chat Message:', msg

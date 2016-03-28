@@ -9,14 +9,24 @@ script_dir = path.dirname(__file__)
 sounds_dir = path.join(script_dir, "sounds")
 file_list = listdir(sounds_dir)
 
-#flushed DB, cleanup before renewing
-def flushDB():
-     r.flushdb()
-     print "--- DB FLUSHED ----"
+#flushed DB, cleanup before renewing, only needed in special cases
+# def flushDB():
+#      r.flushdb()
+#      print "--- DB FLUSHED ----"
 
 
 #creates a set with all filenames
 def createFile_Set():
+    #gets the file_list from redis set
+    file_set = r.smembers("file_list")
+
+    #creates a set "file_list_new" with all newly added sounds
+    for i in file_list:
+        if i not in file_set:
+            r.sadd("file_list_new", i)
+    print r.smembers("file_list_new")
+
+
     #adds all files from folder /sounds
     for i in file_list:
         r.sadd("file_list", i)
