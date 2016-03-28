@@ -195,6 +195,25 @@ def on_chat_message(msg):
             bot.sendChatAction(chat_id, "typing")
             bot.sendMessage(chat_id, "You need to specify a character\ne.g. `'/list a'`", parse_mode="Markdown")
 
+    ### /test command for .ogg problem###
+    #lists all sounds who start with [x]
+    elif (msg_text.startswith("/test")):
+         # absolute dir the script is in
+        script_dir = path.dirname(__file__)
+        file_path = path.join(script_dir, "sounds/afrocircus.ogg")
+        #opens file
+        music_file = open(file_path, 'rb')
+
+        #gets message_id for the reply title
+        msg_id = msg['message_id']
+
+        #sends it as voice message with reply (used as "title")
+        bot.sendVoice(chat_id, music_file)
+
+
+
+
+
     #prints chat message for debuging
     print 'Chat Message:', msg
     #writes user stats

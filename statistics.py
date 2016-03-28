@@ -15,6 +15,12 @@ def write_user_stats(chat_id):
     date_today = date.today()
     today = date_today.strftime('%d/%m/%Y')
 
+    #new joined users
+    if chat_id not in r_stats.smembers("unique_users"):
+        r_stats.sadd("unique_users_joined:"+today, chat_id)
+        print r_stats.smembers("unique_users_joined:"+today)
+
+
     #unique users alltime
     r_stats.sadd("unique_users", chat_id)
     #print "Unique users: "+ str(len(r_stats.smembers("unique_users")))
@@ -63,7 +69,8 @@ def get_stats():
              'unique_users_today': len(r_stats.smembers("unique_users:"+today)),
              'requests_total': r_stats.get("requests_total"),
              'requests_today':r_stats.get("requests:"+today),
-             'sounds_sent': r_stats.get("sounds_sent")}
+             'sounds_sent': r_stats.get("sounds_sent"),
+             'users_joined_today': r_stats.smembers("unique_users_joined:"+today)}
 
     #gets the file_list from redis set
     file_set = list(r.smembers("file_list"))
