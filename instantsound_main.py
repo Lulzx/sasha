@@ -2,8 +2,7 @@ from flask import Flask, request, render_template, send_from_directory
 import telepot
 import base64
 import redis
-import json
-from update_filelist import createFile_Set, createFile_Setx
+from update_filelist import createFile_Set, createFile_Setx, flushDB
 from statistics import get_stats, write_user_stats, write_sound_stats
 from os import path
 from Queue import Queue
@@ -29,7 +28,7 @@ def on_chat_message(msg):
     #sends file with given filename
     elif (msg_text.startswith("/get")):
         #gets the filename
-        file_name = msg_text[5:]+".mp4"
+        file_name = msg_text[5:]+".ogg"
 
         #checks if file is in the file_set/exists
         if file_name in file_set:
@@ -186,7 +185,7 @@ def on_chat_message(msg):
             if not string_x:
                 string_x = "No files with *"+key_letter+"* found"
 
-            #sends out the string "sound1.mp4 \n sound2.mp4 \n....."
+            #sends out the string "sound1.ogg \n sound2.ogg \n....."
             bot.sendChatAction(chat_id, "typing")
             bot.sendMessage(chat_id, string_x, parse_mode="Markdown")
 
@@ -194,22 +193,6 @@ def on_chat_message(msg):
         else:
             bot.sendChatAction(chat_id, "typing")
             bot.sendMessage(chat_id, "You need to specify a character\ne.g. `'/list a'`", parse_mode="Markdown")
-
-    ### /test command for .ogg problem###
-    #lists all sounds who start with [x]
-    elif (msg_text.startswith("/test")):
-        # absolute dir the script is in
-        script_dir = path.dirname(__file__)
-        file_path = path.join(script_dir, "sounds/afrocircus.ogg")
-        #opens file
-        music_file = open(file_path, 'rb')
-
-        #sends it as voice message with reply (used as "title")
-        bot.sendVoice(chat_id, music_file)
-
-
-
-
 
     #prints chat message for debuging
     print 'Chat Message:', msg
@@ -260,6 +243,7 @@ def pass_update():
 
 @app.route('/updateFilelist', methods=['GET'])
 def start_filelist_update():
+    flushDB()
     createFile_Set() #creates the file_set --> see update_filelist.py
     createFile_Setx() #creates sets for all starting letters --> see update_filelist.py
     return 'OK'

@@ -10,9 +10,9 @@ sounds_dir = path.join(script_dir, "sounds")
 file_list = listdir(sounds_dir)
 
 #flushed DB, cleanup before renewing
-# def flushDB():
-#     r.flushdb()
-#     print "--- DB FLUSHED ----"
+def flushDB():
+     r.flushdb()
+     print "--- DB FLUSHED ----"
 
 
 #creates a set with all filenames

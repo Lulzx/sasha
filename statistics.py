@@ -45,7 +45,8 @@ def write_sound_stats(file_name):
     r_stats.incr("sounds_sent")
     #print r_stats.get("sounds_sent")
 
-    #sets "file_name.mp4" -> +1, useful to see which sound is requested the most
+    #sets "file_name.mp4" (* [:-4]+".mp4" * for old filetype) -> +1, useful to see which sound is requested the most
+    file_name = file_name[:-4]+".mp4"
     r_stats.incr(file_name)
     #print r_stats.get(file_name)
 
@@ -70,14 +71,15 @@ def get_stats():
              'requests_total': r_stats.get("requests_total"),
              'requests_today':r_stats.get("requests:"+today),
              'sounds_sent': r_stats.get("sounds_sent"),
-             'users_joined_today': r_stats.smembers("unique_users_joined:"+today)}
+             'users_joined_today': len(r_stats.smembers("unique_users_joined:"+today))}
 
     #gets the file_list from redis set
     file_set = list(r.smembers("file_list"))
 
-    #makes a dict with filename and usage stat {filename.mp4: 12}
+    #makes a dict with filename and usage stat {filename.mp4: 12} --> *[:-4]+".mp4"* fix for .ogg naming to .mp4
     sound_stats = {}
     for i in file_set:
+        i = i[:-4]+".mp4"
         if r_stats.get(i):
             sound_stats[i] = r_stats.get(i)
 
