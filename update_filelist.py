@@ -20,6 +20,11 @@ def createFile_Set():
     #gets the file_list from redis set
     file_set = r.smembers("file_list")
 
+    #removes the "old sound"
+    file_set_new = r.smembers("file_list_new")
+    for i in file_set_new:
+        r.srem("file_list_new", i)
+
     #creates a set "file_list_new" with all newly added sounds
     for i in file_list:
         if i not in file_set:

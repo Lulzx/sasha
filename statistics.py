@@ -71,7 +71,7 @@ def get_stats():
              'requests_total': r_stats.get("requests_total"),
              'requests_today':r_stats.get("requests:"+today),
              'sounds_sent': r_stats.get("sounds_sent"),
-             'users_joined_today': len(r_stats.smembers("unique_users_joined:"+today))}
+             'users_joined_today': r_stats.scard("unique_users_joined:"+today)}
 
     #gets the file_list from redis set
     file_set = list(r.smembers("file_list"))

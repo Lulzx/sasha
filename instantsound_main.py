@@ -75,8 +75,8 @@ def on_chat_message(msg):
                                 parse_mode="Markdown")
 
 
-    ### /random command ###
-    #sends random soundfile from /sounds
+    ### /search command ###
+    #searchs for string in all filenames
     elif (msg_text.startswith("/search")):
 
         key_words = msg_text[8:].lower()
@@ -92,16 +92,14 @@ def on_chat_message(msg):
                 #formats the found results
                 for i in result:
                     suggestions = suggestions + i[:-4] + "\n"
-            #no results =  No results found and 3 random suggestions
+
+            #no results =  No results found add 3 random suggestions
             else:
-                #for special case where q is first letter
-                if key_words[:1] != "q":
-                    #todo dont show duplicate results
-                    suggestions = "No search results found! \n*Recommendations:*\n"\
-                                  + r.srandmember("sounds:"+key_words[:1])[:-4]+"\n" \
-                                  + r.srandmember("sounds:"+key_words[:1])[:-4]
-                else:
-                    suggestions = "No search results found!"
+                #todo dont show duplicate results
+                suggestions = "No search results found! \n*Recommendations:*\n"\
+                              + r.srandmember("sounds:"+key_words[0])[:-4]+"\n" \
+                              + r.srandmember("sounds:"+key_words[0])[:-4]+"\n" \
+                              + r.srandmember("sounds:"+key_words[1])[:-4]
             bot.sendChatAction(chat_id, "typing")
             bot.sendMessage(chat_id, "*Results:*\n"+suggestions,
                                 parse_mode="Markdown")
@@ -136,7 +134,7 @@ def on_chat_message(msg):
         write_sound_stats(rnd_file)
 
 
-    ### /help command ###
+    ### /help + /start command ###
     #sends /help and /start message
     elif (msg_text.startswith("/help")) or (msg_text.startswith("/start")):
 
@@ -199,8 +197,8 @@ def on_chat_message(msg):
             bot.sendMessage(chat_id, "You need to specify a character\ne.g. `'/list a'`", parse_mode="Markdown")
 
 
-    ### /list command ###
-    #lists all sounds who start with [x]
+    ### /new command ###
+    #lists all new sounds
     elif (msg_text.startswith("/new")):
 
         #gets the new sounds out of datastore
