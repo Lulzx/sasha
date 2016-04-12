@@ -251,12 +251,29 @@ def on_inline_query(msg):
         result = filter(lambda x: key_words in x, file_set)
         print result
 
+    sounds_list = []
 
-    # Compose your own answers
-    sounds = [{'type': 'voice', 'id': '1', 'title': 'murloc', 'voice_file_id': 'AwADBAADhAoAArKSeQygPJb0M8dBLAI'},
-              {'type': 'voice', 'id': '2', 'title': 'fuckyou', 'voice_file_id': 'AwADBAADhQoAArKSeQz7Px6ofuqq6gI'}]
+    if result:
+        count = 0
+        for i in result:
+            sound = {
+                'type': 'voice',
+                'id': str(count),
+                'title': i[:-4],
+                'voice_file_id': r.get(i)
+            }
+            count += 1
+            sounds_list.append(sound)
+    else:
+        sounds_list = [{'type': 'article', 'id': '0', 'title': '404', 'message_text': 'No sound found, try again'}]
 
-    bot.answerInlineQuery(query_id, sounds)
+
+
+    ## Compose your own answers
+    # sounds_list = [{'type': 'voice', 'id': '1', 'title': 'murloc', 'voice_file_id': 'AwADBAADhAoAArKSeQygPJb0M8dBLAI'},
+    #           {'type': 'voice', 'id': '2', 'title': 'fuckyou', 'voice_file_id': 'AwADBAADhQoAArKSeQz7Px6ofuqq6gI'}]
+
+    bot.answerInlineQuery(query_id, sounds_list)
 
 
 
