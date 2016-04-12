@@ -18,7 +18,7 @@ def write_user_stats(chat_id):
     #new joined users
     if chat_id not in r_stats.smembers("unique_users"):
         r_stats.sadd("unique_users_joined:"+today, chat_id)
-        print r_stats.smembers("unique_users_joined:"+today)
+        #print r_stats.smembers("unique_users_joined:"+today)
 
 
     #unique users alltime

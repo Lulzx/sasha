@@ -1,4 +1,6 @@
 import redis
+import telepot
+import base64
 from os import listdir, path
 
 r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
@@ -47,3 +49,15 @@ def createFile_Setx():
             r.sadd("sounds:"+i, j)
 
         print r.smembers("sounds:"+i)
+
+
+#this function can be called at "/fileIDList", it generates a datastore mapping "filename"-->"file_id"
+#it sends all sounds to my ID (10760033), out of the response it gets the file_id
+def createFileID_store():
+    TOKEN = base64.b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
+    bot = telepot.Bot(TOKEN)
+
+    for i in file_list:
+        response = bot.sendVoice(10760033, i)
+        r.set(i, response["voice"]["file_id"])
+        print r.get(i)

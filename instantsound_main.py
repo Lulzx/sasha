@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, send_from_directory
 import telepot
 import base64
 import redis
-from update_filelist import createFile_Set, createFile_Setx
+from update_filelist import createFile_Set, createFile_Setx, createFileID_store
 from statistics import get_stats, write_user_stats, write_sound_stats
 from os import path
 from Queue import Queue
@@ -50,6 +50,7 @@ def on_chat_message(msg):
             response = bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
             write_sound_stats(file_name)
             print response
+            print "file_id", response["voice"]["file_id"]
 
         #if file doesn't exist this will send a message and suggestions is >= 3 characters long
         else:
@@ -240,6 +241,7 @@ def on_inline_query(msg):
     print 'Inline Query:', msg
 
 
+
     # Compose your own answers
     articles = [{'type': 'article',
                     'id': '1', 'title': 'Badumtss', 'message_text': '/get@instantsoundbot badumtss'}]
@@ -248,9 +250,9 @@ def on_inline_query(msg):
 
 
 
-def on_chosen_inline_result(msg):
-    result_id, from_id, query_string = telepot.glance(msg, flavor='chosen_inline_result')
-    print 'Chosen Inline Result:', result_id, from_id, query_string
+# def on_chosen_inline_result(msg):
+#     result_id, from_id, query_string = telepot.glance(msg, flavor='chosen_inline_result')
+#     print 'Chosen Inline Result:', result_id, from_id, query_string
 
 
 
@@ -283,6 +285,11 @@ def start_filelist_update():
 def show_stats():
     stats, date_list, daily_requests, sound_stats = get_stats() #gets the values from statistics.py
     return render_template('stats.html', **locals())
+
+@app.route('/fileIDList', methods=['GET'])
+def creat_fileIDList():
+    createFileID_store(bot)
+
 
 
 
