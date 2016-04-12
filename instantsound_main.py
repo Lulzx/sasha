@@ -243,10 +243,10 @@ def on_inline_query(msg):
 
 
     # Compose your own answers
-    articles = [{'type': 'article',
-                    'id': '1', 'title': 'Badumtss', 'message_text': '/get@instantsoundbot badumtss'}]
+    sounds = [{'type': 'voice', 'id': '1', 'title': 'murloc', 'voice_file_id': 'AwADBAADhAoAArKSeQygPJb0M8dBLAI'},
+              {'type': 'voice', 'id': '2', 'title': 'fuckyou', 'voice_file_id': 'AwADBAADhQoAArKSeQz7Px6ofuqq6gI'}]
 
-    bot.answerInlineQuery(query_id, articles)
+    bot.answerInlineQuery(query_id, sounds)
 
 
 
@@ -289,6 +289,7 @@ def show_stats():
 @app.route('/fileIDList', methods=['GET'])
 def creat_fileIDList():
     createFileID_store(bot)
+    return 'OK'
 
 
 

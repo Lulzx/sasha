@@ -58,6 +58,11 @@ def createFileID_store():
     bot = telepot.Bot(TOKEN)
 
     for i in file_list:
-        response = bot.sendVoice(10760033, i)
+        #builds path to file
+        file_path = path.join(script_dir, "sounds/"+i)
+        #opens file
+        music_file = open(file_path, 'rb')
+
+        response = bot.sendVoice(10760033, music_file)
         r.set(i, response["voice"]["file_id"])
         print r.get(i)
