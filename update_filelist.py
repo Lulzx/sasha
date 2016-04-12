@@ -57,12 +57,19 @@ def createFileID_store():
     TOKEN = base64.b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
     bot = telepot.Bot(TOKEN)
 
+    #loops over all files in directory /sounds
     for i in file_list:
-        #builds path to file
-        file_path = path.join(script_dir, "sounds/"+i)
-        #opens file
-        music_file = open(file_path, 'rb')
+        #checks if the key already exists, if not creates a new one
+        if r.get(i) == None:
+            #builds path to file
+            file_path = path.join(script_dir, "sounds/"+i)
+            #opens file
+            music_file = open(file_path, 'rb')
 
-        response = bot.sendVoice(10760033, music_file)
-        r.set(i, response["voice"]["file_id"])
-        print r.get(i)
+            response = bot.sendVoice(10760033, music_file)
+            r.set(i, response["voice"]["file_id"])
+            print "New - filename: %s file_id: %s" % (i, r.get(i))
+
+        else:
+            print "existing key: ", i
+

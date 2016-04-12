@@ -240,6 +240,16 @@ def on_inline_query(msg):
     query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
     print 'Inline Query:', msg
 
+    #gets the file_list from redis set
+    file_set = r.smembers("file_list")
+
+    key_words = query_string.lower()
+
+    #checks if input is more than >= 2
+    if len(key_words) >= 2 and key_words.isalpha():
+        #filters the file_set for matching strings
+        result = filter(lambda x: key_words in x, file_set)
+        print result
 
 
     # Compose your own answers
