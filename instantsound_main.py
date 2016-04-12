@@ -288,7 +288,7 @@ def show_stats():
 
 @app.route('/fileIDList', methods=['GET'])
 def creat_fileIDList():
-    createFileID_store(bot)
+    createFileID_store()
     return 'OK'
 
 
