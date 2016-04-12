@@ -245,29 +245,29 @@ def on_inline_query(msg):
 
     key_words = query_string.lower()
 
+    sounds_list = []
+
     #checks if input is more than >= 2
     if len(key_words) >= 2 and key_words.isalpha():
         #filters the file_set for matching strings
         result = filter(lambda x: key_words in x, file_set)
         print result
 
-    sounds_list = []
-
-    if result:
-        count = 0
-        for i in result:
-            sound = {
-                'type': 'voice',
-                'id': str(count),
-                'title': i[:-4],
-                'voice_file_id': r.get(i)
-            }
-            count += 1
-            sounds_list.append(sound)
-    else:
-        sounds_list = [{'type': 'article', 'id': '0', 'title': '404', 'message_text': 'No sound found, try again'}]
-
-
+        if result:
+            count = 0
+            for i in result:
+                sound = {
+                    'type': 'voice',
+                    'id': str(count),
+                    'title': i[:-4],
+                    'voice_file_id': r.get(i)
+                }
+                count += 1
+                sounds_list.append(sound)
+    # else:
+    #     sounds_list = [{'type': 'article', 'id': '0', 'title': '404', 'message_text': 'No sound found, try again'}]
+    #
+    #
 
     ## Compose your own answers
     # sounds_list = [{'type': 'voice', 'id': '1', 'title': 'murloc', 'voice_file_id': 'AwADBAADhAoAArKSeQygPJb0M8dBLAI'},
