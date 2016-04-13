@@ -12,7 +12,7 @@ app = Flask(__name__)
 r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
 
 #for new defaultresults
-create_inline_results()
+#create_inline_results()
 
 ##
 ### normal bot-chat handling ###
