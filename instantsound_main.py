@@ -10,8 +10,6 @@ app = Flask(__name__)
 
 r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
 
-create_inline_results()
-
 ##
 ### normal bot-chat handling ###
 ##
@@ -50,8 +48,6 @@ def on_chat_message(msg):
             bot.sendChatAction(chat_id, "upload_audio")
             response = bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
             write_sound_stats(file_name)
-
-            print file_set
 
         #if file doesn't exist this will send a message and suggestions is >= 3 characters long
         else:
@@ -246,16 +242,17 @@ def on_inline_query(msg):
 
     key_words = query_string.lower()
 
-
+    sounds_list = r.get("inline_results")
 
     #checks if input is more than >= 2
-    if len(key_words) >= 2 and key_words.isalpha():
+    if len(key_words) >= 1 and key_words.isalpha():
         #filters the file_set for matching strings
         result = filter(lambda x: key_words in x, file_set)
         print result
+        sounds_list = []
 
         if result:
-            sounds_list = []
+
             count = 0
             for i in result:
                 sound = {
