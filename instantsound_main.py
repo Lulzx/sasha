@@ -131,7 +131,7 @@ def on_chat_message(msg):
         bot.sendChatAction(chat_id, "typing")
         bot.sendMessage(chat_id,  rnd_file[:-4])
         bot.sendChatAction(chat_id, "upload_audio")
-        bot.sendVoice(chat_id, r.get(rnd_file[:-4]))
+        bot.sendVoice(chat_id, r.get(rnd_file))
         write_sound_stats(rnd_file)
 
 
