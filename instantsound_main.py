@@ -246,11 +246,14 @@ def on_inline_query(msg):
 
     key_words = query_string.lower()
 
+    #gets the random 50 results from datastore
     sounds_list = literal_eval(r.get('inline_results'))
-    bot.answerInlineQuery(query_id, sounds_list)
+
+    if len(key_words) < 2:
+        bot.answerInlineQuery(query_id, sounds_list)
 
     #checks if input is more than >= 2
-    if len(key_words) >= 2 and key_words.isalpha():
+    elif len(key_words) >= 2 and key_words.isalpha():
         #deletes the sounds_list for results
         sounds_list = []
         #filters the file_set for matching strings
