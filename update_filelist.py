@@ -80,13 +80,11 @@ def createFileID_store():
 #creates a entry (key: inline_results) in datastore with 50  sounds in the 'list[{dict}]' inline results format
 def create_inline_results():
 
-    #file_list from /sounds directory
-    file_list
-
     #shuffles the results so they are not always the same
     shuffle(file_list)
+
     count = 0
-    sounds_list = []
+    default_sounds_list = []
     for i in file_list:
         if count == 49:
             break
@@ -97,9 +95,9 @@ def create_inline_results():
             'voice_file_id': r.get(i)
         }
         count += 1
-        sounds_list.append(sound)
+        default_sounds_list.append(sound)
 
     #stores the list at key 'inline_results'
-    r.set("inline_results", sounds_list)
+    r.set("inline_results", default_sounds_list)
     print r.get("inline_results")
 
