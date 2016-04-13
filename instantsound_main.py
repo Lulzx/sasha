@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, send_from_directory
 import telepot
 import base64
 import redis
+import pickle
 from update_filelist import createFile_Set, createFile_Setx, createFileID_store
 from statistics import get_stats, write_user_stats, write_sound_stats
 from os import path
@@ -49,8 +50,8 @@ def on_chat_message(msg):
             bot.sendChatAction(chat_id, "upload_audio")
             response = bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
             write_sound_stats(file_name)
-            print response
-            print "file_id", response["voice"]["file_id"]
+
+            print file_set
 
         #if file doesn't exist this will send a message and suggestions is >= 3 characters long
         else:
