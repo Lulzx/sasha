@@ -79,14 +79,15 @@ def createFileID_store():
 
 #creates a entry (key: inline_results) in datastore with 50  sounds in the 'list[{dict}]' inline results format
 def create_inline_results():
-    #gets the file_list from redis set
-    file_set = r.smembers("file_list")
+
+    #file_list from /sounds directory
+    file_list
 
     #shuffles the results so they are not always the same
-    shuffle(file_set)
+    shuffle(file_list)
     count = 0
     sounds_list = []
-    for i in file_set:
+    for i in file_list:
         if count == 49:
             break
         sound = {
