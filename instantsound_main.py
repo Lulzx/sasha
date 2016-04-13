@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, send_from_directory
 import telepot
 import base64
 import redis
+import ast
 from update_filelist import createFile_Set, createFile_Setx, createFileID_store, create_inline_results
 from statistics import get_stats, write_user_stats, write_sound_stats
 from os import path
@@ -242,7 +243,7 @@ def on_inline_query(msg):
 
     key_words = query_string.lower()
 
-    sounds_list = r.get("inline_results")
+    sounds_list = ast.literal_eval(r.get("inline_results"))
 
     #checks if input is more than >= 2
     if len(key_words) >= 1 and key_words.isalpha():
@@ -252,7 +253,6 @@ def on_inline_query(msg):
         sounds_list = []
 
         if result:
-
             count = 0
             for i in result:
                 sound = {
