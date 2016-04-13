@@ -16,7 +16,7 @@ file_list = listdir(sounds_dir)
 #      r.flushdb()
 #      print "--- DB FLUSHED ----"
 
-
+#this function can be called at "/updateFilelist"
 #creates a set with all filenames
 def createFile_Set():
     #gets the file_list from redis set
@@ -40,6 +40,7 @@ def createFile_Set():
     print r.smembers("file_list")
 
 
+#this function can be called at "/updateFilelist"
 #creates a set with filenames for all files who start with X
 def createFile_Setx():
     for i in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
@@ -51,8 +52,9 @@ def createFile_Setx():
         print r.smembers("sounds:"+i)
 
 
-#this function can be called at "/fileIDList", it generates a datastore mapping "filename"-->"file_id"
-#it sends all sounds to my ID (10760033), out of the response it gets the file_id
+
+#this function can be called at "/updateFilelist", it generates a datastore mapping "filename"-->"file_id"
+#it sends all new sounds to my ID (10760033), out of the response it gets the file_id
 def createFileID_store():
     TOKEN = base64.b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
     bot = telepot.Bot(TOKEN)
@@ -72,4 +74,24 @@ def createFileID_store():
 
         else:
             print "existing key: ", i
+
+
+#creates a entry (key: inline_results) in datastore with all sounds in the 'list[{dict}]' inline results format
+def create_inline_results():
+    #gets the file_list from redis set
+    file_set = r.smembers("file_list")
+    count = 0
+    sounds_list = []
+    for i in file_set:
+        sound = {
+            'type': 'voice',
+            'id': str(count),
+            'title': i[:-4],
+            'voice_file_id': r.get(i)
+        }
+        count += 1
+        sounds_list.append(sound)
+    #stores the list at key 'inline_results'
+    r.set("inline_results", sounds_list)
+    print r.get("inline_results")
 

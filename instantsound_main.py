@@ -2,8 +2,7 @@ from flask import Flask, request, render_template, send_from_directory
 import telepot
 import base64
 import redis
-import pickle
-from update_filelist import createFile_Set, createFile_Setx, createFileID_store
+from update_filelist import createFile_Set, createFile_Setx, createFileID_store, create_inline_results
 from statistics import get_stats, write_user_stats, write_sound_stats
 from os import path
 from Queue import Queue
@@ -11,6 +10,7 @@ app = Flask(__name__)
 
 r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
 
+create_inline_results()
 
 ##
 ### normal bot-chat handling ###
@@ -246,7 +246,7 @@ def on_inline_query(msg):
 
     key_words = query_string.lower()
 
-    sounds_list = []
+
 
     #checks if input is more than >= 2
     if len(key_words) >= 2 and key_words.isalpha():
@@ -255,6 +255,7 @@ def on_inline_query(msg):
         print result
 
         if result:
+            sounds_list = []
             count = 0
             for i in result:
                 sound = {
@@ -307,18 +308,13 @@ def pass_update():
 def start_filelist_update():
     createFile_Set() #creates the file_set --> see update_filelist.py
     createFile_Setx() #creates sets for all starting letters --> see update_filelist.py
+    createFileID_store() #creates data store with filenames and file_id
     return 'OK'
 
 @app.route('/stats', methods=['GET'])
 def show_stats():
     stats, date_list, daily_requests, sound_stats = get_stats() #gets the values from statistics.py
     return render_template('stats.html', **locals())
-
-@app.route('/fileIDList', methods=['GET'])
-def creat_fileIDList():
-    createFileID_store()
-    return 'OK'
-
 
 
 
