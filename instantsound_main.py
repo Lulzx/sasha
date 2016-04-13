@@ -249,6 +249,8 @@ def on_inline_query(msg):
 
     #checks if input is more than >= 2
     if len(key_words) >= 2 and key_words.isalpha():
+        #deletes the sounds_list for results
+        sounds_list = []
         #filters the file_set for matching strings
         result = filter(lambda x: key_words in x, file_set)
         print result
