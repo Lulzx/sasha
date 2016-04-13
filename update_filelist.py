@@ -1,6 +1,7 @@
 import redis
 import telepot
 import base64
+from random import shuffle
 from os import listdir, path
 
 r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
@@ -76,13 +77,18 @@ def createFileID_store():
             print "existing key: ", i
 
 
-#creates a entry (key: inline_results) in datastore with all sounds in the 'list[{dict}]' inline results format
+#creates a entry (key: inline_results) in datastore with 50  sounds in the 'list[{dict}]' inline results format
 def create_inline_results():
     #gets the file_list from redis set
     file_set = r.smembers("file_list")
+
+    #shuffles the results so they are not always the same
+    shuffle(file_set)
     count = 0
     sounds_list = []
     for i in file_set:
+        if count == 49:
+            break
         sound = {
             'type': 'voice',
             'id': str(count),
@@ -91,6 +97,7 @@ def create_inline_results():
         }
         count += 1
         sounds_list.append(sound)
+
     #stores the list at key 'inline_results'
     r.set("inline_results", sounds_list)
     print r.get("inline_results")

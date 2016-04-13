@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, send_from_directory
 import telepot
 import base64
 import redis
-import ast
+from ast import literal_eval
 from update_filelist import createFile_Set, createFile_Setx, createFileID_store, create_inline_results
 from statistics import get_stats, write_user_stats, write_sound_stats
 from os import path
@@ -10,6 +10,8 @@ from Queue import Queue
 app = Flask(__name__)
 
 r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
+
+create_inline_results()
 
 ##
 ### normal bot-chat handling ###
@@ -243,7 +245,7 @@ def on_inline_query(msg):
 
     key_words = query_string.lower()
 
-    sounds_list = []
+    sounds_list = literal_eval(r.get('inline_results'))
 
     #checks if input is more than >= 2
     if len(key_words) >= 2 and key_words.isalpha():
