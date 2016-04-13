@@ -11,6 +11,7 @@ app = Flask(__name__)
 
 r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
 
+#for new defaultresults
 create_inline_results()
 
 ##
@@ -246,6 +247,7 @@ def on_inline_query(msg):
     key_words = query_string.lower()
 
     sounds_list = literal_eval(r.get('inline_results'))
+    bot.answerInlineQuery(query_id, sounds_list)
 
     #checks if input is more than >= 2
     if len(key_words) >= 2 and key_words.isalpha():
@@ -266,19 +268,21 @@ def on_inline_query(msg):
                 }
                 count += 1
                 sounds_list.append(sound)
+
+        bot.answerInlineQuery(query_id, sounds_list)
+
     # else:
     #     sounds_list = [{'type': 'article', 'id': '0', 'title': '404', 'message_text': 'No sound found, try again'}]
     #
     #
 
-    ## Compose your own answers
+    ## format needed
     # sounds_list = [{'type': 'voice', 'id': '1', 'title': 'murloc', 'voice_file_id': 'AwADBAADhAoAArKSeQygPJb0M8dBLAI'},
     #           {'type': 'voice', 'id': '2', 'title': 'fuckyou', 'voice_file_id': 'AwADBAADhQoAArKSeQz7Px6ofuqq6gI'}]
 
-    bot.answerInlineQuery(query_id, sounds_list)
 
 
-
+# todo for stats?
 # def on_chosen_inline_result(msg):
 #     result_id, from_id, query_string = telepot.glance(msg, flavor='chosen_inline_result')
 #     print 'Chosen Inline Result:', result_id, from_id, query_string
