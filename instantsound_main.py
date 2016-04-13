@@ -39,18 +39,13 @@ def on_chat_message(msg):
 
         #checks if file is in the file_set/exists
         if file_name in file_set:
-            #builds path to file
-            file_path = path.join(script_dir, "sounds/"+file_name)
-
-            #opens file
-            music_file = open(file_path, 'rb')
 
             #gets message_id for the reply title
             msg_id = msg['message_id']
 
             #sends it as voice message with reply (used as "title")
             bot.sendChatAction(chat_id, "upload_audio")
-            response = bot.sendVoice(chat_id, music_file, reply_to_message_id=msg_id)
+            bot.sendVoice(chat_id, r.get(file_name), reply_to_message_id=msg_id)
             write_sound_stats(file_name)
 
         #if file doesn't exist this will send a message and suggestions is >= 3 characters long
