@@ -62,7 +62,7 @@ def createFileID_store():
 
     #loops over all files in directory /sounds
     for i in file_list:
-        #checks if the key already exists, if not creates a new one
+        #checks if the key already exists, if not sends it and creates a new 'key -> file_id'
         if r.get(i) == None:
             #builds path to file
             file_path = path.join(script_dir, "sounds/"+i)

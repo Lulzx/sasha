@@ -127,17 +127,11 @@ def on_chat_message(msg):
         #builds path to file
         file_path = path.join(script_dir, "sounds/"+rnd_file)
 
-        #opens file
-        music_file = open(file_path, 'rb')
-
-        #gets message_id
-        msg_id = msg['message_id']
-
         #sends it as voice message
         bot.sendChatAction(chat_id, "typing")
         bot.sendMessage(chat_id,  rnd_file[:-4])
         bot.sendChatAction(chat_id, "upload_audio")
-        bot.sendVoice(chat_id, music_file)
+        bot.sendVoice(chat_id, r.get(rnd_file[:-4]))
         write_sound_stats(rnd_file)
 
 
@@ -316,6 +310,7 @@ def start_filelist_update():
     createFile_Set() #creates the file_set --> see update_filelist.py
     createFile_Setx() #creates sets for all starting letters --> see update_filelist.py
     createFileID_store() #creates data store with filenames and file_id
+    create_inline_results() #create 50 default inline results
     return 'OK'
 
 @app.route('/stats', methods=['GET'])
