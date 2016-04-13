@@ -243,14 +243,13 @@ def on_inline_query(msg):
 
     key_words = query_string.lower()
 
-    sounds_list = ast.literal_eval(r.get("inline_results"))
+    sounds_list = []
 
     #checks if input is more than >= 2
-    if len(key_words) >= 1 and key_words.isalpha():
+    if len(key_words) >= 2 and key_words.isalpha():
         #filters the file_set for matching strings
         result = filter(lambda x: key_words in x, file_set)
         print result
-        sounds_list = []
 
         if result:
             count = 0
