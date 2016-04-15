@@ -197,6 +197,8 @@ def on_chat_message(msg):
     ### /new command ###
     #lists all new sounds
     elif (msg_text.startswith("/new")):
+        create_x_inline_results()
+
 
         #gets the new sounds out of datastore
         file_set_new = r.smembers("file_list_new")
@@ -230,9 +232,6 @@ def on_chat_message(msg):
 def on_inline_query(msg):
     query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
     print 'Inline Query:', msg
-
-
-    create_x_inline_results()
 
     #gets the file_list from redis set
     file_set = r.smembers("file_list")

@@ -110,14 +110,13 @@ def create_x_inline_results():
         for j in inline_results_with_x:
             count = 0
             x_sounds_list = []
-            for i in file_list:
-              if count == 49:
+            if count == 49:
                 break
             sound = {
                 'type': 'voice',
                 'id': str(count),
-                'title': i[:-4],
-                'voice_file_id': r.get(i)
+                'title': j[:-4],
+                'voice_file_id': r.get(j)
             }
             count += 1
             x_sounds_list.append(sound)
