@@ -106,7 +106,7 @@ def create_x_inline_results():
     #inline results for starting character "inline_results:a", "inline_results:b" etc.
     for i in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
               'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']:
-        inline_results_with_x = r.get("sounds:"+i)
+        inline_results_with_x = r.smembers("sounds:"+i)
         for j in inline_results_with_x:
             count = 0
             x_sounds_list = []
