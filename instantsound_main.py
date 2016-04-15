@@ -238,8 +238,10 @@ def on_inline_query(msg):
 
     query_string = query_string.lower()
 
-    #gets the random 50 results from datastore
+    #gets the random 50 results from datastore and evals it to list[dict]
     default_sounds_list = literal_eval(r.get('inline_results'))
+    #gets all starting with x from datastore and evals it to list[dict]
+    x_sounds_list = literal_eval(r.get("inline_results:"+query_string))
 
     print query_string
     #if query_string is empty
@@ -248,7 +250,7 @@ def on_inline_query(msg):
 
     #if only one character is given, send all sounds starting with this character
     elif len(query_string) == 1 and query_string.isalpha():
-        bot.answerInlineQuery(query_id, r.get("inline_results:"+query_string))
+        bot.answerInlineQuery(query_id, x_sounds_list)
 
     #checks if input is more than >= 2
     elif len(query_string) >= 2 and query_string.isalpha():
