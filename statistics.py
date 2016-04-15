@@ -75,6 +75,7 @@ def get_stats():
 
     #gets the file_list from redis set
     file_set = list(r.smembers("file_list"))
+    file_set.append("inline_sound")
 
     #makes a dict with filename and usage stat {filename.mp4: 12} --> *[:-4]+".mp4"* fix for .ogg naming to .mp4
     sound_stats = {}
