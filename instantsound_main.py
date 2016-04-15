@@ -278,7 +278,7 @@ def on_inline_query(msg):
 
 
 
-#todo for stats?
+#todo sound stats? Filename
 def on_chosen_inline_result(msg):
     result_id, from_id, query_string = telepot.glance(msg, flavor='chosen_inline_result')
     write_user_stats(from_id)
