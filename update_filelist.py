@@ -50,7 +50,7 @@ def createFile_Setx():
         for j in files_with_x:
             r.sadd("sounds:"+i, j)
 
-        print r.smembers("sounds:"+i)
+        print len(r.smembers("sounds:"+i))
 
 
 

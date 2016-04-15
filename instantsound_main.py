@@ -45,6 +45,7 @@ def on_chat_message(msg):
 
             #sends it as voice message with reply (used as "title")
             bot.sendChatAction(chat_id, "upload_audio")
+            #send the file by using its file_id
             bot.sendVoice(chat_id, r.get(file_name), reply_to_message_id=msg_id)
             write_sound_stats(file_name)
 
@@ -128,6 +129,8 @@ def on_chat_message(msg):
         bot.sendChatAction(chat_id, "upload_audio")
         bot.sendVoice(chat_id, r.get(rnd_file))
         write_sound_stats(rnd_file)
+
+        createFile_Setx()
 
 
     ### /help + /start command ###
