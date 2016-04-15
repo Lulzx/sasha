@@ -197,9 +197,6 @@ def on_chat_message(msg):
     ### /new command ###
     #lists all new sounds
     elif (msg_text.startswith("/new")):
-        create_x_inline_results()
-
-
         #gets the new sounds out of datastore
         file_set_new = r.smembers("file_list_new")
 
@@ -240,8 +237,6 @@ def on_inline_query(msg):
 
     #gets the random 50 results from datastore and evals it to list[dict]
     default_sounds_list = literal_eval(r.get('inline_results'))
-    #gets all starting with x from datastore and evals it to list[dict]
-    x_sounds_list = literal_eval(r.get("inline_results:"+query_string))
 
     print query_string
     #if query_string is empty
@@ -250,6 +245,9 @@ def on_inline_query(msg):
 
     #if only one character is given, send all sounds starting with this character
     elif len(query_string) == 1 and query_string.isalpha():
+        #gets all starting with x from datastore and evals it to list[dict]
+        x_sounds_list = literal_eval(r.get("inline_results:"+query_string))
+
         bot.answerInlineQuery(query_id, x_sounds_list)
 
     #checks if input is more than >= 2
@@ -274,17 +272,18 @@ def on_inline_query(msg):
 
         bot.answerInlineQuery(query_id, sounds_list)
 
-
     ## format needed
     # sounds_list = [{'type': 'voice', 'id': '1', 'title': 'murloc', 'voice_file_id': 'AwADBAADhAoAArKSeQygPJb0M8dBLAI'},
     #           {'type': 'voice', 'id': '2', 'title': 'fuckyou', 'voice_file_id': 'AwADBAADhQoAArKSeQz7Px6ofuqq6gI'}]
 
 
 
-# todo for stats?
-# def on_chosen_inline_result(msg):
-#     result_id, from_id, query_string = telepot.glance(msg, flavor='chosen_inline_result')
-#     print 'Chosen Inline Result:', result_id, from_id, query_string
+#todo for stats?
+def on_chosen_inline_result(msg):
+    result_id, from_id, query_string = telepot.glance(msg, flavor='chosen_inline_result')
+    write_user_stats(from_id)
+
+    print 'Chosen Inline Result:', result_id, from_id, query_string
 
 
 
@@ -298,7 +297,8 @@ bot = telepot.Bot(TOKEN)
 update_queue = Queue()  # channel between `app` and `bot`
 
 bot.notifyOnMessage({'normal': on_chat_message,
-                     'inline_query': on_inline_query}, source=update_queue) # take updates from queue
+                     'inline_query': on_inline_query,
+                     'chosen_inline_result': on_chosen_inline_result}, source=update_queue) # take updates from queue
 
 
 
