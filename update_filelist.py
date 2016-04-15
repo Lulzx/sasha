@@ -107,9 +107,9 @@ def create_x_inline_results():
     for i in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
               'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']:
         inline_results_with_x = r.smembers("sounds:"+i)
+        count = 0
+        x_sounds_list = []
         for j in inline_results_with_x:
-            count = 0
-            x_sounds_list = []
             if count == 49:
                 break
             sound = {
