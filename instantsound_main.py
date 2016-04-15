@@ -3,7 +3,7 @@ import telepot
 import base64
 import redis
 from ast import literal_eval
-from update_filelist import createFile_Set, createFile_Setx, createFileID_store, create_inline_results
+from update_filelist import *
 from statistics import get_stats, write_user_stats, write_sound_stats
 from os import path
 from Queue import Queue
@@ -130,8 +130,6 @@ def on_chat_message(msg):
         bot.sendVoice(chat_id, r.get(rnd_file))
         write_sound_stats(rnd_file)
 
-        createFile_Setx()
-
 
     ### /help + /start command ###
     #sends /help and /start message
@@ -233,23 +231,32 @@ def on_inline_query(msg):
     query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
     print 'Inline Query:', msg
 
+
+    create_x_inline_results()
+
     #gets the file_list from redis set
     file_set = r.smembers("file_list")
 
-    key_words = query_string.lower()
+    query_string = query_string.lower()
 
     #gets the random 50 results from datastore
     default_sounds_list = literal_eval(r.get('inline_results'))
 
-    if len(key_words) < 2:
+    print query_string
+    #if query_string is empty
+    if query_string == "":
         bot.answerInlineQuery(query_id, default_sounds_list)
 
+    #if only one character is given, send all sounds starting with this character
+    elif len(query_string) == 1 and query_string.isalpha():
+        bot.answerInlineQuery(query_id, r.get("inline_results:"+query_string))
+
     #checks if input is more than >= 2
-    elif len(key_words) >= 2 and key_words.isalpha():
+    elif len(query_string) >= 2 and query_string.isalpha():
         #deletes the sounds_list for results
         sounds_list = []
         #filters the file_set for matching strings
-        result = filter(lambda x: key_words in x, file_set)
+        result = filter(lambda x: query_string in x, file_set)
         print result
 
         if result:
@@ -266,10 +273,6 @@ def on_inline_query(msg):
 
         bot.answerInlineQuery(query_id, sounds_list)
 
-    # else:
-    #     sounds_list = [{'type': 'article', 'id': '0', 'title': '404', 'message_text': 'No sound found, try again'}]
-    #
-    #
 
     ## format needed
     # sounds_list = [{'type': 'voice', 'id': '1', 'title': 'murloc', 'voice_file_id': 'AwADBAADhAoAArKSeQygPJb0M8dBLAI'},
@@ -308,7 +311,8 @@ def start_filelist_update():
     createFile_Set() #creates the file_set --> see update_filelist.py
     createFile_Setx() #creates sets for all starting letters --> see update_filelist.py
     createFileID_store() #creates data store with filenames and file_id
-    create_inline_results() #create 50 default inline results
+    create_default_inline_results() #create 50 default inline results
+    create_x_inline_results() #creates <=50 inline results starting with char x
     return 'OK'
 
 @app.route('/stats', methods=['GET'])

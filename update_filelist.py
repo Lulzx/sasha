@@ -50,7 +50,7 @@ def createFile_Setx():
         for j in files_with_x:
             r.sadd("sounds:"+i, j)
 
-        print len(r.smembers("sounds:"+i))
+        print r.smembers("sounds:"+i)
 
 
 
@@ -78,7 +78,7 @@ def createFileID_store():
 
 
 #creates a entry (key: inline_results) in datastore with 50  sounds in the 'list[{dict}]' inline results format
-def create_inline_results():
+def create_default_inline_results():
 
     #shuffles the results so they are not always the same
     shuffle(file_list)
@@ -100,4 +100,28 @@ def create_inline_results():
     #stores the list at key 'inline_results'
     r.set("inline_results", default_sounds_list)
     print r.get("inline_results")
+
+
+def create_x_inline_results():
+    #inline results for starting character "inline_results:a", "inline_results:b" etc.
+    for i in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+              'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']:
+        inline_results_with_x = r.get("sounds:"+i)
+        for j in inline_results_with_x:
+            count = 0
+            x_sounds_list = []
+            for i in file_list:
+              if count == 49:
+                break
+            sound = {
+                'type': 'voice',
+                'id': str(count),
+                'title': i[:-4],
+                'voice_file_id': r.get(i)
+            }
+            count += 1
+            x_sounds_list.append(sound)
+
+        r.set("inline_results:"+i, x_sounds_list)
+        print r.smembers("inline_results:"+i)
 
