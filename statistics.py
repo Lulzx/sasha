@@ -37,13 +37,13 @@ def write_user_stats(chat_id):
     r_stats.incr("requests:"+today)
     #print "Requests today: "+ str(r_stats.get("requests:"+today))
 
-    #increments for every sound sent
-    r_stats.incr("sounds_sent")
-    #print r_stats.get("sounds_sent")
-
 
 #writes all sounds send to the datastore
 def write_sound_stats(file_name):
+
+    #increments for every sound sent
+    r_stats.incr("sounds_sent")
+    #print r_stats.get("sounds_sent")
 
     #sets "file_name.mp4" (* [:-4]+".mp4" * for old filetype) -> +1, useful to see which sound is requested the most
     file_name = file_name[:-4]+".mp4"
