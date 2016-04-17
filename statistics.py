@@ -111,7 +111,7 @@ def inform_users():
     user_IDs = r_stats.smembers("unique_users")
     print user_IDs
     for i in user_IDs:
-        if str(i) > 0:
+        if int(i) > 0:
             print i
 
     for i in range(3):
