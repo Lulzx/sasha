@@ -108,7 +108,7 @@ def inform_users():
     TOKEN = base64.b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
     bot = telepot.Bot(TOKEN)
 
-    user_IDs = r_stats.smembers("unique_users")
+    #user_IDs = r_stats.smembers("unique_users")
 
     for i in range(0,2):
         if i > 0:
@@ -119,6 +119,8 @@ def inform_users():
                         "-- New sounds added: type /new\n",
                         disable_web_page_preview=True,
                         parse_mode="Markdown")
+            print "test if"
+        print "loop"
 
 
 
