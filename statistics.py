@@ -107,20 +107,20 @@ def get_stats():
 def inform_users():
     TOKEN = base64.b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
     bot = telepot.Bot(TOKEN)
-
-    #user_IDs = r_stats.smembers("unique_users")
-
-    for i in range(0,2):
-        if i > 0:
-            bot.sendMessage(10760033,
-                        "*- Instant Sound Bot got updated -*\n"
-                        "* 18.04.2016 *\n"
-                        "-- INLINE usable: type @instantsoundbot in every chat\n",
-                        "-- New sounds added: type /new\n",
-                        disable_web_page_preview=True,
-                        parse_mode="Markdown")
-            print "test if"
-        print "loop"
+    print "test inform func"
+    # #user_IDs = r_stats.smembers("unique_users")
+    #
+    # for i in range(0,2):
+    #     if i > 0:
+    #         bot.sendMessage(10760033,
+    #                     "*- Instant Sound Bot got updated -*\n"
+    #                     "* 18.04.2016 *\n"
+    #                     "-- INLINE usable: type @instantsoundbot in every chat\n",
+    #                     "-- New sounds added: type /new\n",
+    #                     disable_web_page_preview=True,
+    #                     parse_mode="Markdown")
+    #         print "test if"
+    #     print "loop"
 
 
 
