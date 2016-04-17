@@ -4,7 +4,7 @@ import base64
 import redis
 from ast import literal_eval
 from update_filelist import *
-from statistics import get_stats, write_user_stats, write_sound_stats
+from statistics import get_stats, write_user_stats, write_sound_stats, inform_users
 from os import path
 from Queue import Queue
 app = Flask(__name__)
@@ -152,7 +152,6 @@ def on_chat_message(msg):
                         "`/list [x]` \n"
                         "--> eg. '`/list a`'\n"
                         "--> lists all sounds who start with a\n"
-                        "\n"
                         "\n"
                         "`/new` \n"
                         "--> shows all new sounds"
@@ -322,6 +321,11 @@ def start_filelist_update():
 def show_stats():
     stats, date_list, daily_requests, sound_stats = get_stats() #gets the values from statistics.py
     return render_template('stats.html', **locals())
+
+@app.route('/inform', methods=['GET'])
+def inform_about_updates():
+    inform_users()
+    return 'OK'
 
 
 

@@ -1,4 +1,6 @@
 import redis
+import telepot
+from base64 import b64decode
 from datetime import date, timedelta
 
 #redis database 1 --> statistics database
@@ -98,6 +100,26 @@ def get_stats():
 
     #returns the stats dict, date_list, daily_req and sound_stats dict
     return (stats, date_list, daily_requests, sound_stats)
+
+
+
+#sends message to every user to inform about changes
+def inform_users():
+    TOKEN = b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
+    bot = telepot.Bot(TOKEN)
+
+    user_IDs = r_stats.smembers("unique_users")
+
+    for i in range(0,2):
+        if i > 0:
+            bot.sendMessage(10760033,
+                        "*- Instant Sound Bot got updated -*\n"
+                        "* 18.04.2016 *\n"
+                        "-- INLINE usable: type @instantsoundbot in every chat\n",
+                        "-- New sounds added: type /new\n",
+                        disable_web_page_preview=True,
+                        parse_mode="Markdown")
+
 
 
 
