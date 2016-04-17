@@ -110,7 +110,10 @@ def inform_users():
     print "test inform func"
     user_IDs = r_stats.smembers("unique_users")
     print user_IDs
-    
+    for i in user_IDs:
+        if i > 0:
+            print i
+
     for i in range(3):
         if i > 0:
             bot.sendMessage(10760033,
@@ -120,9 +123,6 @@ def inform_users():
                             "-- New sounds added: type /new\n",
                             disable_web_page_preview=True,
                             parse_mode="Markdown")
-            print "test if"
-        print "loop"
-
 
 
 
