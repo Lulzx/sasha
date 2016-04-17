@@ -1,6 +1,6 @@
 import redis
 import telepot
-from base64 import b64decode
+import base64
 from datetime import date, timedelta
 
 #redis database 1 --> statistics database
@@ -105,7 +105,7 @@ def get_stats():
 
 #sends message to every user to inform about changes
 def inform_users():
-    TOKEN = b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
+    TOKEN = base64.b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
     bot = telepot.Bot(TOKEN)
 
     user_IDs = r_stats.smembers("unique_users")
