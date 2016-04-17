@@ -108,8 +108,9 @@ def inform_users():
     TOKEN = base64.b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
     bot = telepot.Bot(TOKEN)
     print "test inform func"
-    #user_IDs = r_stats.smembers("unique_users")
-
+    user_IDs = r_stats.smembers("unique_users")
+    print user_IDs
+    
     for i in range(3):
         if i > 0:
             bot.sendMessage(10760033,
