@@ -144,7 +144,7 @@ def on_chat_message(msg):
         if msg_text == "/start inline_help":
             bot.sendMessage(chat_id,
                         "*--- Instant Sound Bot ---*\n"
-                        "*Inline help:*\n"
+                        "*------ Inline help ------*\n"
                         "You can use this two methods inline:\n"
                         "\n"
                         "*Single character:*\n"
