@@ -115,6 +115,7 @@ def on_chat_message(msg):
 
     ### /random command ###
     #sends random soundfile from /sounds
+    #also shuffles the default inline results
     elif msg_text.startswith("/random"):
 
         #gets random number out length from file_list
@@ -129,6 +130,10 @@ def on_chat_message(msg):
         bot.sendChatAction(chat_id, "upload_audio")
         bot.sendVoice(chat_id, r.get(rnd_file))
         write_sound_stats(rnd_file)
+
+
+        #shuffles the default_inline_results
+        create_default_inline_results()
 
 
     ### /help + /start command ###
@@ -155,6 +160,25 @@ def on_chat_message(msg):
                         "\n"
                         "`/new` \n"
                         "--> shows all new sounds"
+                        "\n"
+                        "Rate this bot:\n"
+                        "telegram.me/storebot?start=instantsoundbot",
+                        disable_web_page_preview=True,
+                        parse_mode="Markdown")
+
+    ### /inline help command ###
+    #sends /inline message, triggered when clicked on the inline "no result" button
+    elif (msg_text.startswith("/help")) or (msg_text.startswith("/start")):
+
+        bot.sendMessage(chat_id,
+                        "*--- Instant Sound Bot ---*\n"
+                        "*Inline helper:*\n"
+                        "\n"
+                        "This bot is inline available, that means you can use it in every chat!\n"
+                        "Simply type `@instantsoundbot`\n"
+                        "No input gives you a selection of sounds\n"
+                        "1 character gives you all sound starting with this character\n"
+                        "2 or more character allows to search for a specific sound\n"
                         "\n"
                         "Rate this bot:\n"
                         "telegram.me/storebot?start=instantsoundbot",
@@ -227,17 +251,12 @@ def on_chat_message(msg):
 ##
 def on_inline_query(msg):
     query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
-    print 'Inline Query:', msg
-
-    #gets the file_list from redis set
-    file_set = r.smembers("file_list")
 
     query_string = query_string.lower()
 
     #gets the random 50 results from datastore and evals it to list[dict]
     default_sounds_list = literal_eval(r.get('inline_results'))
 
-    print query_string
     #if query_string is empty
     if query_string == "":
         bot.answerInlineQuery(query_id, default_sounds_list)
@@ -251,6 +270,9 @@ def on_inline_query(msg):
 
     #checks if input is more than >= 2
     elif len(query_string) >= 2 and query_string.isalpha():
+        #gets the file_list from redis set
+        file_set = r.smembers("file_list")
+
         #deletes the sounds_list for results
         sounds_list = []
         #filters the file_set for matching strings
@@ -272,7 +294,9 @@ def on_inline_query(msg):
             bot.answerInlineQuery(query_id, sounds_list)
 
         else:
-            bot.answerInlineQuery(query_id, '[]', switch_pm_text="No sound found! Click me for help", switch_pm_parameter="/start")
+            bot.answerInlineQuery(query_id, '[]',
+                                  switch_pm_text="No sound found! Try 'cat' or click here for help",
+                                  switch_pm_parameter="/inline")
 
 
     ## format needed
