@@ -166,9 +166,9 @@ def on_chat_message(msg):
                         disable_web_page_preview=True,
                         parse_mode="Markdown")
 
-    ### /inline help command ###
+    ### /start inline help command ###
     #sends /inline message, triggered when clicked on the inline "no result" button
-    elif (msg_text.startswith("/help")) or (msg_text.startswith("/start")):
+    elif msg_text == "/start inline":
 
         bot.sendMessage(chat_id,
                         "*--- Instant Sound Bot ---*\n"
@@ -295,8 +295,8 @@ def on_inline_query(msg):
 
         else:
             bot.answerInlineQuery(query_id, '[]',
-                                  switch_pm_text="No sound found! Try 'cat' or click here for help",
-                                  switch_pm_parameter="/inline")
+                                  switch_pm_text="No sound found! Click/tap here for help",
+                                  switch_pm_parameter="inline_help")
 
 
     ## format needed
