@@ -99,7 +99,6 @@ def create_default_inline_results():
 
     #stores the list at key 'inline_results'
     r.set("inline_results", default_sounds_list)
-    print r.get("inline_results")
 
 
 def create_x_inline_results():
