@@ -139,6 +139,7 @@ def on_chat_message(msg):
     ### /help + /start command ###
     #sends /help and /start message
     elif (msg_text.startswith("/help")) or (msg_text.startswith("/start")):
+        print msg_text
 
         bot.sendMessage(chat_id,
                         "*--- Instant Sound Bot ---*\n"
