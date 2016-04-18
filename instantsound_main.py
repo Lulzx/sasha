@@ -139,39 +139,10 @@ def on_chat_message(msg):
     ### /help + /start command ###
     #sends /help and /start message
     elif (msg_text.startswith("/help")) or (msg_text.startswith("/start")):
-        print msg_text
 
-        bot.sendMessage(chat_id,
-                        "*--- Instant Sound Bot ---*\n"
-                        "*Use the following commands:*\n"
-                        "\n"
-                        "`/get [file_name]`\n"
-                        "--> eg. '`/get badumtss`'\n"
-                        "\n"
-                        "`/search [keyword]` \n"
-                        "--> search for a sound\n"
-                        "--> requires at least 2 characters\n"
-                        "\n"
-                        "`/random`\n"
-                        "--> sends random sound\n "
-                        "\n"
-                        "`/list [x]` \n"
-                        "--> eg. '`/list a`'\n"
-                        "--> lists all sounds who start with a\n"
-                        "\n"
-                        "`/new` \n"
-                        "--> shows all new sounds"
-                        "\n"
-                        "Rate this bot:\n"
-                        "telegram.me/storebot?start=instantsoundbot",
-                        disable_web_page_preview=True,
-                        parse_mode="Markdown")
-
-    ### /start inline help command ###
-    #sends /inline message, triggered when clicked on the inline "no result" button
-    elif msg_text == "/start inline_help":
-
-        bot.sendMessage(chat_id,
+        #inline help triggered by clicking on the "no sound found! click here for help" button
+        if msg_text == "/start inline_help":
+            bot.sendMessage(chat_id,
                         "*--- Instant Sound Bot ---*\n"
                         "*Inline helper:*\n"
                         "\n"
@@ -186,6 +157,33 @@ def on_chat_message(msg):
                         disable_web_page_preview=True,
                         parse_mode="Markdown")
 
+        #normal /help and /start message
+        else:
+            bot.sendMessage(chat_id,
+                            "*--- Instant Sound Bot ---*\n"
+                            "*Use the following commands:*\n"
+                            "\n"
+                            "`/get [file_name]`\n"
+                            "--> eg. '`/get badumtss`'\n"
+                            "\n"
+                            "`/search [keyword]` \n"
+                            "--> search for a sound\n"
+                            "--> requires at least 2 characters\n"
+                            "\n"
+                            "`/random`\n"
+                            "--> sends random sound\n "
+                            "\n"
+                            "`/list [x]` \n"
+                            "--> eg. '`/list a`'\n"
+                            "--> lists all sounds who start with a\n"
+                            "\n"
+                            "`/new` \n"
+                            "--> shows all new sounds"
+                            "\n"
+                            "Rate this bot:\n"
+                            "telegram.me/storebot?start=instantsoundbot",
+                            disable_web_page_preview=True,
+                            parse_mode="Markdown")
 
     ### /list command ###
     #lists all sounds who start with [x]
