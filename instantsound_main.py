@@ -269,7 +269,11 @@ def on_inline_query(msg):
                 count += 1
                 sounds_list.append(sound)
 
-        bot.answerInlineQuery(query_id, sounds_list)
+            bot.answerInlineQuery(query_id, sounds_list)
+
+        else:
+            bot.answerInlineQuery(query_id, '[]', switch_pm_text="No sound found! Click me for help", switch_pm_parameter="/start")
+
 
     ## format needed
     # sounds_list = [{'type': 'voice', 'id': '1', 'title': 'murloc', 'voice_file_id': 'AwADBAADhAoAArKSeQygPJb0M8dBLAI'},
