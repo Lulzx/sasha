@@ -145,13 +145,13 @@ def on_chat_message(msg):
             bot.sendMessage(chat_id,
                         "*--- Instant Sound Bot ---*\n"
                         "*Inline help:*\n"
-                        "Can be used in this two ways:\n"
+                        "You can use this two methods inline:\n"
                         "\n"
                         "*Single character:*\n"
-                        "eg. `x` -- shows you all sound starting with this character\n"
+                        "  `x` --> shows you all sound starting with this character\n"
                         "\n"
                         "*Search (2 or more characters):*\n"
-                        "eg. `cat` -- searches for 'cat'\n"
+                        "  `cat` --> searches for 'cat'\n"
                         "\n"
                         "Please rate this bot:\n"
                         "telegram.me/storebot?start=instantsoundbot",
