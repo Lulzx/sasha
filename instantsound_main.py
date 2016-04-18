@@ -147,10 +147,9 @@ def on_chat_message(msg):
                         "*Inline help:*\n"
                         "\n"
                         "This bot is *inline* usable, that means you can use it in every chat!\n"
-                        "Simply type `@instantsoundbot` and type:\n"
-                        "` ` No input gives you a selection of sounds\n"
-                        "`x` 1 character shows you all sound starting with this character\n"
-                        "`badum` searches for matching sounds\n"
+                        "Simply type `@instantsoundbot` and use:\n"
+                        "1) `x` -- shows you all sound starting with this character\n"
+                        "2) `badum` -- searches for matching sounds\n"
                         "\n"
                         "Please rate this bot:\n"
                         "telegram.me/storebot?start=instantsoundbot",
