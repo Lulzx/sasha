@@ -169,7 +169,7 @@ def on_chat_message(msg):
 
     ### /start inline help command ###
     #sends /inline message, triggered when clicked on the inline "no result" button
-    elif msg_text == "/start inline":
+    elif msg_text == "/start inline_help":
 
         bot.sendMessage(chat_id,
                         "*--- Instant Sound Bot ---*\n"
