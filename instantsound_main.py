@@ -144,15 +144,15 @@ def on_chat_message(msg):
         if msg_text == "/start inline_help":
             bot.sendMessage(chat_id,
                         "*--- Instant Sound Bot ---*\n"
-                        "*Inline helper:*\n"
+                        "*Inline help:*\n"
                         "\n"
-                        "This bot is inline available, that means you can use it in every chat!\n"
-                        "Simply type `@instantsoundbot`\n"
-                        "No input gives you a selection of sounds\n"
-                        "1 character gives you all sound starting with this character\n"
-                        "2 or more character allows to search for a specific sound\n"
+                        "This bot is *inline* usable, that means you can use it in every chat!\n"
+                        "Simply type `@instantsoundbot` and type:\n"
+                        "` ` No input gives you a selection of sounds\n"
+                        "`x` 1 character shows you all sound starting with this character\n"
+                        "`badum` searches for matching sounds\n"
                         "\n"
-                        "Rate this bot:\n"
+                        "Please rate this bot:\n"
                         "telegram.me/storebot?start=instantsoundbot",
                         disable_web_page_preview=True,
                         parse_mode="Markdown")
@@ -180,7 +180,7 @@ def on_chat_message(msg):
                             "`/new` \n"
                             "--> shows all new sounds"
                             "\n"
-                            "Rate this bot:\n"
+                            "Please rate this bot:\n"
                             "telegram.me/storebot?start=instantsoundbot",
                             disable_web_page_preview=True,
                             parse_mode="Markdown")
