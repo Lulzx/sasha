@@ -287,9 +287,6 @@ def on_chosen_inline_result(msg):
     print 'Inline Feedback:', msg
 
 
-
-
-
 TOKEN = base64.b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
 
 #Flask routing and passing the POST to the queue test
