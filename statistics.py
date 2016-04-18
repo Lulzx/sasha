@@ -110,6 +110,8 @@ def inform_users():
     print "test inform func"
     user_IDs = r_stats.smembers("unique_users")
     print user_IDs
+
+    #todo new sounds + finish this here + telepot update!  --> send update
     for i in user_IDs:
         if int(i) > 0:
             print i
@@ -118,8 +120,8 @@ def inform_users():
         if i > 0:
             bot.sendMessage(10760033,
                             "*- Instant Sound Bot got updated -*\n"
-                            "  18.04.2016\n"
-                            "-- INLINE usable: type @instantsoundbot in every chat\n"
+                            "`  18.04.2016`\n"
+                            "-- *INLINE* available : type @instantsoundbot in every chat\n"
                             "-- New sounds added: type /new\n",
                             disable_web_page_preview=True,
                             parse_mode="Markdown")

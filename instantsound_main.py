@@ -297,9 +297,9 @@ app = Flask(__name__)
 bot = telepot.Bot(TOKEN)
 update_queue = Queue()  # channel between `app` and `bot`
 
-bot.notifyOnMessage({'normal': on_chat_message,
-                     'inline_query': on_inline_query,
-                     'chosen_inline_result': on_chosen_inline_result}, source=update_queue) # take updates from queue
+bot.message_loop({'chat': on_chat_message,
+                  'inline_query': on_inline_query,
+                  'chosen_inline_result': on_chosen_inline_result}, source=update_queue) # take updates from queue
 
 
 
