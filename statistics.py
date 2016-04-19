@@ -112,6 +112,7 @@ def inform_users():
     #sends update message to every user
     for i in user_IDs:
         if int(i) > 0:
+            
             bot.sendMessage(14879777,
                             "*- Instant Sound Bot got updated -*\n"
                             "  _19.04.2016_\n"
