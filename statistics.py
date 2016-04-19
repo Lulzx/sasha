@@ -110,9 +110,10 @@ def inform_users():
     user_IDs = r_stats.smembers("unique_users")
 
     #sends update message to every user
-    for i in user_IDs:
+    for i in range(3):
+        print user_IDs
         if int(i) > 0:
-            
+            print "Prepare message for: ", i
             bot.sendMessage(14879777,
                             "*- Instant Sound Bot got updated -*\n"
                             "  _19.04.2016_\n"
