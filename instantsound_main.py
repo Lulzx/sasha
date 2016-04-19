@@ -281,6 +281,8 @@ def on_inline_query(msg):
         if result:
             count = 0
             for i in result:
+                if count == 49:
+                    break
                 sound = {
                     'type': 'voice',
                     'id': str(count),

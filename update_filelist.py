@@ -60,21 +60,20 @@ def createFileID_store():
     TOKEN = base64.b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
     bot = telepot.Bot(TOKEN)
 
-    #loops over all files in directory /sounds
-    for i in file_list:
-        #checks if the key already exists, if not sends it and creates a new 'key -> file_id'
-        if r.get(i) == None:
-            #builds path to file
-            file_path = path.join(script_dir, "sounds/"+i)
-            #opens file
-            music_file = open(file_path, 'rb')
+    file_list_new = r.smembers("file_list_new")
 
-            response = bot.sendVoice(10760033, music_file)
-            r.set(i, response["voice"]["file_id"])
-            print "New - filename: %s file_id: %s" % (i, r.get(i))
+    #loops over all new files and sends each file to my ID
+    for i in file_list_new:
 
-        else:
-            print "existing key: ", i
+        #builds path to file
+        file_path = path.join(script_dir, "sounds/"+i)
+        #opens file
+        music_file = open(file_path, 'rb')
+
+        response = bot.sendVoice(10760033, music_file)
+        r.set(i, response["voice"]["file_id"])
+        print "New - filename: %s file_id: %s" % (i, r.get(i))
+
 
 
 #creates a entry (key: inline_results) in datastore with 50  sounds in the 'list[{dict}]' inline results format
