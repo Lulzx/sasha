@@ -111,10 +111,9 @@ def inform_users():
 
     #sends update message to every user
     for i in range(3):
-        print user_IDs
         if int(i) > 0:
             print "Prepare message for: ", i
-            bot.sendMessage(14879777,
+            response = bot.sendMessage(10760033,
                             "*- Instant Sound Bot got updated -*\n"
                             "  _19.04.2016_\n"
                             "-- Now *INLINE* available: type @instantsoundbot in every chat\n"
@@ -123,6 +122,7 @@ def inform_users():
                             parse_mode="Markdown")
 
             print "Message sent to: ", i
+            print "Response: ", response
 
     # #for testing
     # for i in range(3):
