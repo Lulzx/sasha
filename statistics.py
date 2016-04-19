@@ -119,6 +119,7 @@ def inform_users():
                             "-- New sounds added: type /new\n",
                             disable_web_page_preview=True,
                             parse_mode="Markdown")
+            
             print "Message sent to: ", i
 
     # #for testing
