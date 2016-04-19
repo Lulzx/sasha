@@ -120,4 +120,4 @@ def create_x_inline_results():
             x_sounds_list.append(sound)
 
         r.set("inline_results:"+i, x_sounds_list)
-        print "Key :"+i, r.get("inline_results:"+i)
+        print "Key: "+i, r.get("inline_results:"+i)
