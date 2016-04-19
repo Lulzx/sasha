@@ -112,7 +112,7 @@ def inform_users():
     #sends update message to every user
     for i in user_IDs:
         if int(i) > 0:
-            bot.sendMessage(i,
+            bot.sendMessage(int(i),
                             "*- Instant Sound Bot got updated -*\n"
                             "  _19.04.2016_\n"
                             "-- Now *INLINE* available: type @instantsoundbot in every chat\n"
