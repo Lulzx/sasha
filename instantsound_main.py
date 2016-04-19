@@ -4,15 +4,12 @@ import base64
 import redis
 from ast import literal_eval
 from update_filelist import *
-from statistics import get_stats, write_user_stats, write_sound_stats, inform_users
+from statistics import get_stats, write_user_stats, write_sound_stats
 from os import path
 from Queue import Queue
 app = Flask(__name__)
 
 r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
-
-#for new defaultresults
-#create_inline_results()
 
 ##
 ### normal bot-chat handling ###
@@ -276,7 +273,6 @@ def on_inline_query(msg):
         sounds_list = []
         #filters the file_set for matching strings
         result = filter(lambda x: query_string in x, file_set)
-        print result
 
         if result:
             count = 0
@@ -348,12 +344,6 @@ def pass_update():
 def show_stats():
     stats, date_list, daily_requests, sound_stats = get_stats() #gets the values from statistics.py
     return render_template('stats.html', **locals())
-
-@app.route('/inform', methods=['GET'])
-def inform_about_updates():
-    inform_users()
-    return 'OK'
-
 
 
 if __name__ == '__main__':

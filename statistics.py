@@ -103,26 +103,26 @@ def get_stats():
 
 
 
-#sends message to every user to inform about update
-def inform_users():
-    TOKEN = base64.b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
-    bot = telepot.Bot(TOKEN)
-    user_IDs = r_stats.smembers("unique_users")
-
-    #sends update message to every user
-    for i in range(3):
-        if int(i) > 0:
-            print "Prepare message for: ", i
-            response = bot.sendMessage(10760033,
-                            "*- Instant Sound Bot got updated -*\n"
-                            "  _19.04.2016_\n"
-                            "-- Now *INLINE* available: type @instantsoundbot in every chat\n"
-                            "-- New sounds added: type /new\n",
-                            disable_web_page_preview=True,
-                            parse_mode="Markdown")
-
-            print "Message sent to: ", i
-            print "Response: ", response
+# #sends message to every user to inform about update
+# def inform_users():
+#     TOKEN = base64.b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
+#     bot = telepot.Bot(TOKEN)
+#     user_IDs = r_stats.smembers("unique_users")
+#
+#     #sends update message to every user
+#     for i in range(3):
+#         if int(i) > 0:
+#             print "Prepare message for: ", i
+#             response = bot.sendMessage(10760033,
+#                             "*- Instant Sound Bot got updated -*\n"
+#                             "  _19.04.2016_\n"
+#                             "-- Now *INLINE* available: type @instantsoundbot in every chat\n"
+#                             "-- New sounds added: type /new\n",
+#                             disable_web_page_preview=True,
+#                             parse_mode="Markdown")
+#
+#             print "Message sent to: ", i
+#             print "Response: ", response
 
     # #for testing
     # for i in range(3):
