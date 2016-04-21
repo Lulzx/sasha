@@ -76,12 +76,12 @@ def on_chat_message(msg):
         #searchs for string in all filenames
         elif (msg_text.startswith("/search")):
 
-            key_words = msg_text[8:].lower()
+            key_word = msg_text[8:].lower()
 
             #checks if input is more than >= 2
-            if len(key_words) >= 2 and key_words.isalpha():
+            if len(key_word) >= 2 and key_word.isalpha():
                 #filters the file_set for matching strings
-                result = filter(lambda x: key_words in x, file_set)
+                result = filter(lambda x: key_word in x, file_set)
 
                 #if results are found, format them
                 if result:
@@ -94,9 +94,9 @@ def on_chat_message(msg):
                 else:
                     #todo dont show duplicate results
                     suggestions = "No search results found! \n*Recommendations:*\n"\
-                                  + r.srandmember("sounds:"+key_words[0])[:-4]+"\n" \
-                                  + r.srandmember("sounds:"+key_words[0])[:-4]+"\n" \
-                                  + r.srandmember("sounds:"+key_words[1])[:-4]
+                                  + r.srandmember("sounds:"+key_word[0])[:-4]+"\n" \
+                                  + r.srandmember("sounds:"+key_word[0])[:-4]+"\n" \
+                                  + r.srandmember("sounds:"+key_word[1])[:-4]
                 bot.sendChatAction(chat_id, "typing")
                 bot.sendMessage(chat_id, "*Results:*\n"+suggestions,
                                     parse_mode="Markdown")
@@ -104,7 +104,7 @@ def on_chat_message(msg):
             #sends
             else:
                 bot.sendChatAction(chat_id, "typing")
-                bot.sendMessage(chat_id, "Please type 2 or more characters\nOr try `/list [x]`" ,
+                bot.sendMessage(chat_id, "Please type 2 or more characters\nOr try `/list [x]`",
                                     parse_mode="Markdown")
 
         ### /random command ###
@@ -217,8 +217,9 @@ def on_chat_message(msg):
             if file_set_new:
                 #formats the file list
                 new_sounds = ""
-                for i in file_set_new:
-                    new_sounds = new_sounds + i[:-4] + "\n"
+                new_sounds = [new_sounds + i[:-4]+"\n" for i in file_set_new]
+                # for i in file_set_new:
+                #     new_sounds = new_sounds + i[:-4] + "\n"
 
                 #sends out the string "sound1.ogg \n sound2.ogg \n....."
                 bot.sendChatAction(chat_id, "typing")
