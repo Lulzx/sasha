@@ -223,7 +223,7 @@ def on_chat_message(msg):
 
                 #sends out the string "sound1.ogg \n sound2.ogg \n....."
                 bot.sendChatAction(chat_id, "typing")
-                bot.sendMessage(chat_id, new_sounds, parse_mode="Markdown")
+                bot.sendMessage(chat_id, str(new_sounds), parse_mode="Markdown")
             else:
                 #sends nothing new
                 bot.sendChatAction(chat_id, "typing")
