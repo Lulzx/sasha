@@ -289,6 +289,12 @@ def on_inline_query(msg):
             bot.answerInlineQuery(query_id, '[]',
                                   switch_pm_text="No sound found! Click/tap here for help",
                                   switch_pm_parameter="inline_help")
+            
+    #else for untypical inputs (special character $?/"%& etc.)
+    else:
+        bot.answerInlineQuery(query_id, '[]',
+                                  switch_pm_text="No sound found! Click/tap here for help",
+                                  switch_pm_parameter="inline_help")
 
 
     ## format needed
