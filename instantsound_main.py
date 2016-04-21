@@ -65,10 +65,10 @@ def on_chat_message(msg):
                     bot.sendMessage(chat_id, "`404`\nSound *"+file_name[:-4]+"* not found."+suggestions,
                                     parse_mode="Markdown")
 
-                #sends 404 and please 3 or more characters
+                #sends 404 and search / list help
                 else:
                     bot.sendChatAction(chat_id, "typing")
-                    bot.sendMessage(chat_id, "`404`\nSound *"+file_name[:-4]+"* not found.\n Try `/search xx` or `/list [x]`" ,
+                    bot.sendMessage(chat_id, "`404`\nSound *"+file_name[:-4]+"* not found.\n Try `/search [xx...]` or `/list [x]`" ,
                                     parse_mode="Markdown")
 
 
