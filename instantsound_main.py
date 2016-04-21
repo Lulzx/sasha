@@ -246,11 +246,10 @@ def on_inline_query(msg):
 
     query_string = query_string.lower()
 
-    #gets the random 50 results from datastore and evals it to list[dict]
-    default_sounds_list = literal_eval(r.get('inline_results'))
-
     #if query_string is empty
     if query_string == "":
+        #gets the 50 random results from datastore and evals it to list[dict]
+        default_sounds_list = literal_eval(r.get('inline_results'))
         bot.answerInlineQuery(query_id, default_sounds_list)
 
     #if only one character is given, send all sounds starting with this character
@@ -261,7 +260,7 @@ def on_inline_query(msg):
         bot.answerInlineQuery(query_id, x_sounds_list)
 
     #checks if input is more than >= 2
-    elif len(query_string) >= 2 and query_string.isalpha():
+    elif len(query_string) >= 2:
         #gets the file_list from redis set
         file_set = r.smembers("file_list")
 
