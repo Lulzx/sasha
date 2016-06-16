@@ -135,10 +135,10 @@ def on_chat_message(msg):
             if msg_text == "/start inline_help":
                 bot.sendMessage(chat_id,
                             "*--- Inline help ---*\n"
-                            "You can use this two methods inline:\n"
+                            "You can use two methods inline:\n"
                             "\n"
                             "*Single character:*\n"
-                            "  `x` --> shows you all sound starting with this character\n"
+                            "  `x` --> shows you all sounds starting with this character\n"
                             "\n"
                             "*Search (2 or more characters):*\n"
                             "  `cat` --> searches for 'cat'\n"
