@@ -145,7 +145,7 @@ def on_chat_message(msg):
                             "\n"
                             "[Please rate this bot! Click here](telegram.me/storebot?start=instantsoundbot)\n"
                             "\n"
-                            "[For support or sound requests group! Click here](https://telegram.me/instantsoundbot_support)",
+                            "[For support or sound requests! Click here](https://telegram.me/instantsoundbot_support)",
                             disable_web_page_preview=True,
                             parse_mode="Markdown")
 
@@ -174,7 +174,7 @@ def on_chat_message(msg):
                                 "\n"
                                 "[Please rate this bot! Click here](telegram.me/storebot?start=instantsoundbot)\n"
                                 "\n"
-                                "[For support or sound requests group! Click here](https://telegram.me/instantsoundbot_support)",
+                                "[For support or sound requests! Click here](https://telegram.me/instantsoundbot_support)",
                                 disable_web_page_preview=True,
                                 parse_mode="Markdown")
 
