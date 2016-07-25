@@ -143,8 +143,9 @@ def on_chat_message(msg):
                             "*Search (2 or more characters):*\n"
                             "  `cat` --> searches for 'cat'\n"
                             "\n"
-                            "Please rate this bot:\n"
-                            "telegram.me/storebot?start=instantsoundbot",
+                            "[Please rate this bot! Click here](telegram.me/storebot?start=instantsoundbot)\n"
+                            "\n"
+                            "[For support or sound requests group! Click here](https://telegram.me/instantsoundbot_support)",
                             disable_web_page_preview=True,
                             parse_mode="Markdown")
 
@@ -171,8 +172,9 @@ def on_chat_message(msg):
                                 "`/new` \n"
                                 "--> shows all new sounds"
                                 "\n"
-                                "Please rate this bot:\n"
-                                "telegram.me/storebot?start=instantsoundbot",
+                                "[Please rate this bot! Click here](telegram.me/storebot?start=instantsoundbot)\n"
+                                "\n"
+                                "[For support or sound requests group! Click here](https://telegram.me/instantsoundbot_support)",
                                 disable_web_page_preview=True,
                                 parse_mode="Markdown")
 
@@ -332,14 +334,14 @@ def pass_update():
     return 'OK'
 
 #commented that it doesn't get accidentaly triggered
-# @app.route('/updateFilelist', methods=['GET'])
-# def start_filelist_update():
-#     createFile_Set() #creates the file_set --> see update_filelist.py
-#     createFile_Setx() #creates sets for all starting letters --> see update_filelist.py
-#     createFileID_store() #creates data store with filenames and file_id
-#     create_default_inline_results() #create 50 default inline results
-#     create_x_inline_results() #creates <=50 inline results starting with char x
-#     return 'OK'
+@app.route('/updateFilelist', methods=['GET'])
+def start_filelist_update():
+    createFile_Set() #creates the file_set --> see update_filelist.py
+    createFile_Setx() #creates sets for all starting letters --> see update_filelist.py
+    createFileID_store() #creates data store with filenames and file_id
+    create_default_inline_results() #create 50 default inline results
+    create_x_inline_results() #creates <=50 inline results starting with char x
+    return 'OK'
 
 @app.route('/stats', methods=['GET'])
 def show_stats():
