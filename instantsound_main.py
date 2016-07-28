@@ -17,9 +17,6 @@ r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
 
-    #prints chat message for debuging
-    print 'Chat Message:', msg
-    
     #only process if the message is a text message
     if content_type == "text":
 
@@ -318,7 +315,7 @@ def on_chosen_inline_result(msg):
     print 'Inline Feedback:', msg
 
 
-TOKEN = base64.b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
+TOKEN = "209294002:AAHkZckG7FLGjekah4ab7D3QxOhWIEa0Ru4"
 
 #Flask routing and passing the POST to the queue test
 app = Flask(__name__)
