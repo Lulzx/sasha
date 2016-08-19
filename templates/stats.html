@@ -68,22 +68,23 @@
             </script>
         </div>
 
-        <div style="float: right; width: 30%">
-            <br>
-            Most used sounds:
-            <table class="sortable">
-                <thead>
-                  <tr><th>Sound</th><th>Usage</th></tr>
-                </thead>
-                <tbody>
-                    {% for key, value in sound_stats.iteritems() %}
-                        <tr><td> {{ key }} </td><td> {{ value }} </td></tr>
-                    {% endfor %}
-                </tbody>
-                <tfoot>
-                  <tr><td>TOTAL</td><td>{{ stats['sounds_sent'] }}</td></tr>
-                </tfoot>
-            </table>
-        </div>
+        <!--Most used sounds is not saying much anymore because chosen "inline sounds" are not (yet) analysed-->
+        <!--<div style="float: right; width: 30%">-->
+            <!--<br>-->
+            <!--Most used sounds:-->
+            <!--<table class="sortable">-->
+                <!--<thead>-->
+                  <!--<tr><th>Sound</th><th>Usage</th></tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                    <!--{% for key, value in sound_stats.iteritems() %}-->
+                        <!--<tr><td> {{ key }} </td><td> {{ value }} </td></tr>-->
+                    <!--{% endfor %}-->
+                <!--</tbody>-->
+                <!--<tfoot>-->
+                  <!--<tr><td>TOTAL</td><td>{{ stats['sounds_sent'] }}</td></tr>-->
+                <!--</tfoot>-->
+            <!--</table>-->
+        <!--</div>-->
     </div>
 </html>
