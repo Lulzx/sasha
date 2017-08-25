@@ -1,6 +1,7 @@
 import redis
 import telepot
 import base64
+import os
 from datetime import date, timedelta
 
 REDIS_PW = os.environ['REDISPW']
