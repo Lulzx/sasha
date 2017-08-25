@@ -4,7 +4,8 @@ import base64
 from random import shuffle
 from os import listdir, path
 
-r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
+REDIS_PW = os.environ['REDISPW']
+r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password=REDIS_PW)
 
 # absolute dir the script is in
 script_dir = path.dirname(__file__)
@@ -57,7 +58,7 @@ def createFile_Setx():
 #this function can be called at "/updateFilelist", it generates a datastore mapping "filename"-->"file_id"
 #it sends all new sounds to my ID (10760033), out of the response it gets the file_id
 def createFileID_store():
-    TOKEN = base64.b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
+    TOKEN = os.environ['TOKEN']
     bot = telepot.Bot(TOKEN)
 
     file_list_new = r.smembers("file_list_new")

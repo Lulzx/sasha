@@ -3,11 +3,12 @@ import telepot
 import base64
 from datetime import date, timedelta
 
+REDIS_PW = os.environ['REDISPW']
 #redis database 1 --> statistics database
-r_stats = redis.StrictRedis(host='127.2.73.2', port=16379, db=1, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
+r_stats = redis.StrictRedis(host='127.2.73.2', port=16379, db=1, password=REDIS_PW)
 
 #redis database 0 for fileset
-r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
+r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password=REDIS_PW)
 
 
 #writes every chat_id into "unique_users" set - alltime and daily
@@ -105,7 +106,7 @@ def get_stats():
 
 # #sends message to every user to inform about update
 # def inform_users():
-#     TOKEN = base64.b64decode("MjA5Mjk0MDAyOkFBRjA4bUV4YWwxRVpfMHBUdXFSWFpVWnk0dmhTQWJTTUhZ")
+#     TOKEN = #####
 #     bot = telepot.Bot(TOKEN)
 #     user_IDs = r_stats.smembers("unique_users")
 #

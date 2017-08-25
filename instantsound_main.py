@@ -9,7 +9,9 @@ from Queue import Queue
 
 app = Flask(__name__)
 
-r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password="ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5")
+
+REDIS_PW = os.environ['REDISPW']
+r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password=REDIS_PW)
 
 ##
 ### normal bot-chat handling ###
@@ -315,7 +317,7 @@ def on_chosen_inline_result(msg):
     print 'Inline Feedback:', msg
 
 
-TOKEN = "209294002:AAHkZckG7FLGjekah4ab7D3QxOhWIEa0Ru4"
+TOKEN = os.environ['TOKEN']
 
 #Flask routing and passing the POST to the queue test
 app = Flask(__name__)
