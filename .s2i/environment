@@ -1,2 +1,2 @@
-APP_MODULE=wsgi:app
+APP_MODULE=wsgi:application
 APP_CONFIG=config.py
