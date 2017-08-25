@@ -1,11 +1,10 @@
 import redis
 import telepot
 import base64
-import os
 from random import shuffle
+from os import listdir, path, environ
 
-
-REDIS_PW = os.environ['REDISPW']
+REDIS_PW = environ['REDISPW']
 r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password=REDIS_PW)
 
 # absolute dir the script is in
