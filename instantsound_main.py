@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 
 REDIS_PW = os.environ['REDISPW']
-r = redis.StrictRedis(host='127.2.73.2', port=16379, db=0, password=REDIS_PW)
+r = redis.StrictRedis(host='172.30.217.247', port=6379, db=0, password=REDIS_PW)
 
 ##
 ### normal bot-chat handling ###
