@@ -339,6 +339,7 @@ def pass_update():
 #commented that it doesn't get accidentaly triggered
 @app.route('/updateFilelist', methods=['GET'])
 def start_filelist_update():
+    flushDB() #delets complete DB
     createFile_Set() #creates the file_set --> see update_filelist.py
     createFile_Setx() #creates sets for all starting letters --> see update_filelist.py
     createFileID_store() #creates data store with filenames and file_id
