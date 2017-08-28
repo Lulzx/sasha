@@ -14,9 +14,9 @@ sounds_dir = path.join(script_dir, "sounds")
 file_list = listdir(sounds_dir)
 
 #flushed DB, cleanup before renewing, only needed in special cases
-# def flushDB():
-#      r.flushdb()
-#      print "--- DB FLUSHED ----"
+def flushDB():
+    r.flushdb()
+    print "--- DB FLUSHED ----"
 
 #this function can be called at "/updateFilelist"
 #creates a set with all filenames
