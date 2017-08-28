@@ -1,4 +1,4 @@
 Flask>=0.10.1
-telepot>=8.1
+telepot==8.1
 redis>=2.10.5
 gunicorn>=19.7.1
