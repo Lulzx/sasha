@@ -58,7 +58,7 @@ def createFile_Setx():
 #this function can be called at "/updateFilelist", it generates a datastore mapping "filename"-->"file_id"
 #it sends all new sounds to my ID (10760033), out of the response it gets the file_id
 def createFileID_store():
-    TOKEN = os.environ['TOKEN']
+    TOKEN = environ['TOKEN']
     bot = telepot.Bot(TOKEN)
 
     file_list_new = r.smembers("file_list_new")
