@@ -336,15 +336,14 @@ def pass_update():
     update_queue.put(request.data)  # pass update to bot
     return 'OK'
 
-#commented that it doesn't get accidentaly triggered
-#@app.route('/updateFilelist', methods=['GET'])
-#def start_filelist_update():
-#    createFile_Set() #creates the file_set --> see update_filelist.py
-#    createFile_Setx() #creates sets for all starting letters --> see update_filelist.py
-#    createFileID_store() #creates data store with filenames and file_id
-#    create_default_inline_results() #create 50 default inline results
-#    create_x_inline_results() #creates <=50 inline results starting with char x
-#    return 'OK'
+@app.route('/updateFilelist', methods=['GET'])
+def start_filelist_update():
+    createFile_Set() #creates the file_set --> see update_filelist.py
+    createFile_Setx() #creates sets for all starting letters --> see update_filelist.py
+    createFileID_store() #creates data store with filenames and file_id
+    create_default_inline_results() #create 50 default inline results
+    create_x_inline_results() #creates <=50 inline results starting with char x
+    return 'OK'
 
 @app.route('/stats', methods=['GET'])
 def show_stats():
